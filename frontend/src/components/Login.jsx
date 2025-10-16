@@ -1,10 +1,26 @@
-import React from 'react';
+import { useState } from "react";
 import LevelUpLogo from './LevelUpLogo';
 import sharedStyles from './SharedStyles';
 import PageWrapper from './PageWrapper';
 
 
-const Login = ({ onForgotPasswordClick, onSignUpClick  }) => {
+const Login = ({ onForgotPasswordClick, onSignUpClick, onLoginSuccess  }) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+
+    // Will replace with real authentication later
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Mock user credentials
+        if (email === 'test@test.com' && password === 'password') {
+            setError('');
+            onLoginSuccess();
+        } else {
+            setError('Invalid email or password.');
+        }
+    };
+
   return (
     <>
       <style>{sharedStyles}</style>
@@ -21,7 +37,7 @@ const Login = ({ onForgotPasswordClick, onSignUpClick  }) => {
                 Sign in to continue to your dashboard
               </p>
             </div>
-            <form className="mt-8 space-y-6" action="#" method="POST">
+            <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               <input type="hidden" name="remember" value="true" />
               <div className="rounded-md shadow-sm -space-y-px">
                 <div>
@@ -34,6 +50,8 @@ const Login = ({ onForgotPasswordClick, onSignUpClick  }) => {
                     required
                     className="appearance-none rounded-t-md relative block w-full px-3 py-3 border border-gray-600 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--brand-pink)] focus:border-[var(--brand-red)] focus:z-10 sm:text-sm transition-all"
                     placeholder="Email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div>
@@ -46,9 +64,15 @@ const Login = ({ onForgotPasswordClick, onSignUpClick  }) => {
                     required
                     className="appearance-none rounded-b-md relative block w-full px-3 py-3 border border-gray-600 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--brand-pink)] focus:border-[var(--brand-red)] focus:z-10 sm:text-sm transition-all"
                     placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
               </div>
+              
+              {error && (
+                <p className="text-sm text-red-400 text-center">{error}</p>
+              )}
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center">

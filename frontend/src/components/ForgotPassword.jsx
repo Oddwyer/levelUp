@@ -1,8 +1,7 @@
-import React from "react";
+import { useState } from "react";
 import sharedStyles from './SharedStyles';
 import PageWrapper from './PageWrapper';
 import LevelUpLogo from './LevelUpLogo';
-import { useState } from "react";
 
 const ForgotPassword = ({ onBackToLogin }) => {
   const [submitted, setSubmitted] = useState(false);
