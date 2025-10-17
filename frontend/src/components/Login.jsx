@@ -1,5 +1,5 @@
 import { useState } from "react";
-import LevelUpLogo from './LevelUpLogo';
+import levelUp from '../assets/levelUp-logo.png';
 import sharedStyles from './SharedStyles';
 import PageWrapper from './PageWrapper';
 
@@ -28,7 +28,7 @@ const Login = ({ onForgotPasswordClick, onSignUpClick, onLoginSuccess  }) => {
           <div className="max-w-md w-full space-y-8 bg-[var(--brand-dark)] bg-opacity-80 backdrop-blur-lg p-10 rounded-2xl shadow-2xl border border-gray-700/50">
             <div>
               <div className="flex justify-center">
-                <LevelUpLogo />
+                <img src={levelUp} alt="LevelUp Logo" className="h-20 w-auto" />
               </div>
               <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
                 Welcome to LevelUp

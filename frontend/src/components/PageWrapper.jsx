@@ -1,11 +1,11 @@
 import React from "react";
+import mountainBackground from '../assets/mountains.png';
 
 const PageWrapper = ({ children }) => (
   <div className="font-['Montserrat'] relative min-h-screen">
     <div className="absolute top-0 left-0 w-full h-1/2">
       <img 
-      //insert mountain background image here
-        src=""
+        src={mountainBackground}
         alt="Mountain background"
         className="w-full h-full object-cover"
       />

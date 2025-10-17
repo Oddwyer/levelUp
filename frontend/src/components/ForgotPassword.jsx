@@ -1,7 +1,7 @@
 import { useState } from "react";
 import sharedStyles from './SharedStyles';
 import PageWrapper from './PageWrapper';
-import LevelUpLogo from './LevelUpLogo';
+import levelUp from '../assets/levelUp-logo.png';
 
 const ForgotPassword = ({ onBackToLogin }) => {
   const [submitted, setSubmitted] = useState(false);
@@ -17,7 +17,7 @@ const ForgotPassword = ({ onBackToLogin }) => {
       <PageWrapper>
         <div className="max-w-md w-full space-y-8 bg-[var(--brand-dark)] bg-opacity-80 backdrop-blur-lg p-10 rounded-2xl shadow-2xl border border-gray-700/50">
           <div className="flex justify-center">
-            <LevelUpLogo />
+            <img src={levelUp} alt="LevelUp Logo" className="h-20 w-auto" />
           </div>
           {!submitted ? (
             <>

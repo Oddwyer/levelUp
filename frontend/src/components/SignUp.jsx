@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PageWrapper from "./PageWrapper";
 import sharedStyles from "./SharedStyles";
-import LevelUpLogo from "./LevelUpLogo";
+import levelUp from '../assets/levelUp-logo.png';
 
 const SignUp = ({ onBackToLogin }) => {
   const [submitted, setSubmitted] = useState(false);
@@ -19,7 +19,7 @@ const SignUp = ({ onBackToLogin }) => {
           {submitted ? (
              <div className="text-center">
                 <div className="flex justify-center">
-                    <LevelUpLogo />
+                    <img src={levelUp} alt="LevelUp Logo" className="h-20 w-auto" />
                 </div>
                 <h2 className="mt-6 text-center text-3xl font-extrabold text-white">Thank you for signing up!</h2>
                 <p className="mt-4 text-center text-sm text-gray-300">
@@ -35,7 +35,7 @@ const SignUp = ({ onBackToLogin }) => {
             <>
               <div>
                 <div className="flex justify-center">
-                  <LevelUpLogo />
+                  <img src={levelUp} alt="LevelUp Logo" className="h-20 w-auto" />
                 </div>
                 <h2 className="mt-6 text-center text-3xl font-extrabold text-white">Create your account</h2>
                 <p className="mt-2 text-center text-sm text-gray-300">Join LevelUp to start your journey</p>

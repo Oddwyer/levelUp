@@ -1,7 +1,6 @@
 import { useState } from "react";
 import sharedStyles from './SharedStyles';
 import PageWrapper from './PageWrapper';
-import LevelUpLogo from './LevelUpLogo';
 
 // This is meant to be replaced with the actual dashboard later
 const Dashboard = ({ onLogout }) => (
