@@ -1,18 +1,42 @@
-// Import React Hook
-import React, {useState, useEffect} from 'react';
+// Import React hook
+import React, { useState, useEffect } from 'react';
+//Imported class
+import RestClient from './RestClient';
+import AddExpenseForm from './AddExpenseForm';
+import ExpenseDetails from './ExpenseDetails';
 
-// Import css File
+// Import css file
 import './Expense.css';
 
-export default function Expense(props){
-const msg = props.msg
-return(
-<div className="Expense">
+export default function Expense() {
+  // State for list display
+  const [expenses, setExpenses] = useState([]);
 
-</div>)
+  // Auto-load expenses on mount
+  useEffect(() => {
+    RestClient.getExpenses()
+      .then((expenses) => setExpenses(expenses))
+      .catch((err) => alert(err));
+  }, []);
 
-async function displayExpenses(){
-  const data = await RestClient.getExpenses()
-  Promise.then(data => console.log(`All expenses: ${JSON.stringify(data)}`))
-}
+  // Refresh handler
+  const handleAddExpense = async (expenseData) => {
+    try {
+      await RestClient.addExpense({ expenseData });
+      //Refresh list
+      const refreshList = await RestClient.getExpenses();
+      //Set w/ list or empty array as fail-safe
+      setExpenses(refreshList || []);
+    } catch (err) {
+      console.error('Failed to create expenses:', err);
+    }
+  };
+
+  return (
+    <div className="expenses-page">
+      <h1>Your Expenses</h1>
+      <ExpenseDetails expenses={expenses} />
+      <AddExpenseForm onAddExpense={handleAddExpense} />
+    </div>
+  );
 }
