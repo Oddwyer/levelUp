@@ -1,3 +1,15 @@
+:root{
+    --brand-red: #A41727;
+    --brand-red-dark: #8F1321;
+    --brand-pink: #FF747B;
+    --Brand-black: #00000;
+    --brand-gray: #333333;
+    --brand-white: #FFFFFF;
+    --border-white: rgba(255,255,255,0.45);
+    --radius-pill: 999px;
+    --maxw: 1200px;
+}
+
 .App {
   text-align: center;
 }
