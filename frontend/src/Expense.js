@@ -6,7 +6,8 @@ import AddExpenseForm from './AddExpenseForm';
 import ExpenseDetails from './ExpenseDetails';
 
 // Import css file
-import './Expense.css';
+import './ExpenseDetails.css';
+import './AddExpenseForm.css';
 
 export default function Expense() {
   // State for list display
@@ -34,9 +35,15 @@ export default function Expense() {
 
   return (
     <div className="expenses-page">
-      <h1>Your Expenses</h1>
-      <ExpenseDetails expenses={expenses} />
-      <AddExpenseForm onAddExpense={handleAddExpense} />
+      <section className="split-view">
+        <div className="pane upper">
+          <h1>Your Expenses</h1>
+          <ExpenseDetails expenses={expenses} />
+        </div>
+        <div className="pane lower">
+          <AddExpenseForm onAddExpense={handleAddExpense} />
+        </div>
+      </section>
     </div>
   );
 }

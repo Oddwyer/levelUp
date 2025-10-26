@@ -1,12 +1,14 @@
-import logo from './logo.svg';
+//Import css
 import './App.css';
 import './ExpenseNav.css';
-import './Expense.css';
+import './ExpenseDetails.css';
+import './AddExpenseForm.css';
+
+//Import components
 import axios from 'axios';
-import Expense from './Expense';
 import ExpenseNav from './ExpenseNav';
 import { useEffect, useState } from 'react';
-import RestClient from './RestClient';
+import Expense from './Expense';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -21,8 +23,13 @@ function App() {
   };
   return (
     <div className="App">
-      <ExpenseNav />
-      <Expense />
+      <div className="App-backdrop" />
+      <header className="site-header">
+        <ExpenseNav />
+      </header>
+      <main className="app-main">
+        <Expense />
+      </main>
     </div>
   );
 }

@@ -1,17 +1,27 @@
-:root{
-    --brand-red: #A41727;
-    --brand-red-dark: #8F1321;
-    --brand-pink: #FF747B;
-    --Brand-black: #00000;
-    --brand-gray: #333333;
-    --brand-white: #FFFFFF;
-    --border-white: rgba(255,255,255,0.45);
-    --radius-pill: 999px;
-    --maxw: 1200px;
+:root {
+  --brand-red: #a41727;
+  --brand-red-dark: #8f1321;
+  --brand-pink: #ff747b;
+  --brand-black: #00000;
+  --brand-gray: #333333;
+  --brand-white: #ffffff;
+  --border-white: rgba(255, 255, 255, 0.45);
+  --radius-pill: 999px;
+  --maxw: 1200px;
+  --font-base: 'Montserrat', sans-serif;
+  --header-h: 72px;
+}
+
+body {
+  font-family: var(--font-base);
+  color: #000;
+  margin: 0;
 }
 
 .App {
-  text-align: center;
+  display: grid;
+  grid-template-rows: 40% 60%; /* top 40%, bottom 60% */
+  height: 100vh;
 }
 
 .App-logo {
@@ -27,7 +37,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: var(--header-h);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,6 +48,60 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.App-backdrop {
+  position: fixed; /* stays put even when scrolling */
+  inset: 0rem;
+  background-image: url('./LevelUpBD.svg');
+  background-repeat: no-repeat;
+  background-size: cover; /* or 'contain' depending on design */
+  background-position: center;
+  z-index: -1; /* ensures it’s behind other content */
+}
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-h);
+  z-index: 1000;
+  align-items: center;
+}
+
+.app-main {
+  margin-top: var(--header-h);
+  height: calc(100vh - var(--header-h));
+}
+
+/* Expense split */
+.expense-shell {
+  display: grid;
+  grid-template-rows: 1fr 1fr; /* upper half / lower half */
+  height: 100%;
+}
+
+.expenses-page h1 {
+  margin-top: var(--header-h);
+  min-height: var(--header-h);
+  padding-top: 0; /* prevent double spacing */
+  padding: 0 1.5rem;
+  font-size: 2rem;
+  color: var(--brand-red-dark);
+  font-family: var(--font-base);
+}
+
+.pane {
+  position: relative;
+  z-index: 1; /* above backdrop */
+  padding: 1rem;
+  overflow: auto; /* each half can scroll independently */
+}
+
+.pane.lower {
+  align-content: end; /* pack content at the bottom of the pane */
+  overflow: visible; /* each half can scroll independently */
 }
 
 @keyframes App-logo-spin {

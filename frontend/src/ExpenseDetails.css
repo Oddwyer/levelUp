@@ -1,0 +1,32 @@
+/* Overall container for the display section */
+.expenses-display {
+  max-width: 800px; /* keeps layout from stretching too wide */
+  padding: 1.5rem; /* adds breathing room around content */
+}
+
+/* Lays out cards in a list */
+.expense-list {
+  display: flex;
+  flex-direction: column; /* stack cards vertically */
+  gap: 1rem; /* space between cards */
+  height: var(--header-h);
+}
+
+/* Each individual expense "card" */
+.expense-card {
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 12px; /* soft rounded edges */
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* subtle shadow for depth */
+  font-family: var(--font-base);
+}
+
+/* Category title style */
+.expense-category h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #000000;
+  font-family: var(--font-base);
+  padding: 0 1.5rem;
+}
