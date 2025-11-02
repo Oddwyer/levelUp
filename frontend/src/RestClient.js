@@ -1,9 +1,10 @@
 export default class RestClient {
-  static baseUrl = 'http://localhost:8080';
+  static baseUrl = 'http://localhost:8080/api';
+
 
   // Rest endpoint to get expenses
   static async getExpenses() {
-    const url = `${RestClient.base.url}/expenses`;
+    const url = `${RestClient.baseUrl}/expenses`;
     try {
       // Save fetched data
       const response = await fetch(url);
@@ -21,7 +22,7 @@ export default class RestClient {
 
   // Rest endpoint to add expense
   static async addExpense(expense) {
-    const url = `${RestClient.base.url}/expenses`;
+    const url = `${RestClient.baseUrl}/expenses`;
     try {
       // Save fetched data
       const response = await fetch(url, {
