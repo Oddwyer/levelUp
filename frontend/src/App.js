@@ -23,7 +23,6 @@ function App() {
   };
   return (
     <div className="App">
-      <div className="App-backdrop" />
       <header className="site-header">
         <ExpenseNav />
       </header>

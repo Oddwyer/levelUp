@@ -2,6 +2,7 @@
 .expenses-display {
   max-width: 800px; /* keeps layout from stretching too wide */
   padding: 1.5rem; /* adds breathing room around content */
+  overflow: hidden;
 }
 
 /* Lays out cards in a list */
@@ -9,7 +10,8 @@
   display: flex;
   flex-direction: column; /* stack cards vertically */
   gap: 1rem; /* space between cards */
-  height: var(--header-h);
+  height: 65vh;
+  overflow-y: auto;
 }
 
 /* Each individual expense "card" */
@@ -30,3 +32,4 @@
   font-family: var(--font-base);
   padding: 0 1.5rem;
 }
+

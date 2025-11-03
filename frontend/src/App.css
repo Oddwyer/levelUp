@@ -20,7 +20,8 @@ body {
 
 .App {
   display: grid;
-  grid-template-rows: 40% 60%; /* top 40%, bottom 60% */
+  grid-template-rows: 40% 60%;
+  /* top 40%, bottom 60% */
   height: 100vh;
 }
 
@@ -50,15 +51,6 @@ body {
   color: #61dafb;
 }
 
-.App-backdrop {
-  position: fixed; /* stays put even when scrolling */
-  inset: 0rem;
-  background-image: url('./LevelUpBD.svg');
-  background-repeat: no-repeat;
-  background-size: cover; /* or 'contain' depending on design */
-  background-position: center;
-  z-index: -1; /* ensures it’s behind other content */
-}
 
 .site-header {
   position: fixed;
@@ -75,40 +67,14 @@ body {
   height: calc(100vh - var(--header-h));
 }
 
-/* Expense split */
-.expense-shell {
-  display: grid;
-  grid-template-rows: 1fr 1fr; /* upper half / lower half */
-  height: 100%;
-}
-
-.expenses-page h1 {
-  margin-top: var(--header-h);
-  min-height: var(--header-h);
-  padding-top: 0; /* prevent double spacing */
-  padding: 0 1.5rem;
-  font-size: 2rem;
-  color: var(--brand-red-dark);
-  font-family: var(--font-base);
-}
-
-.pane {
-  position: relative;
-  z-index: 1; /* above backdrop */
-  padding: 1rem;
-  overflow: auto; /* each half can scroll independently */
-}
-
-.pane.lower {
-  align-content: end; /* pack content at the bottom of the pane */
-  overflow: visible; /* each half can scroll independently */
-}
 
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
+

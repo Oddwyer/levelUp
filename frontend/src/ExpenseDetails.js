@@ -1,6 +1,7 @@
 // This component defines display list for expenses.
 export default function ExpenseDetails({ expenses }) {
   return (
+
     <div className="expenses-display">
       {expenses.length > 0 ? (
         // Wrapper for all expense "cards" (small container for each expense)
@@ -31,5 +32,6 @@ export default function ExpenseDetails({ expenses }) {
         <p>No expenses to date.</p>
       )}
     </div>
+
   );
 }

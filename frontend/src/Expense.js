@@ -5,9 +5,11 @@ import RestClient from './RestClient';
 import AddExpenseForm from './AddExpenseForm';
 import ExpenseDetails from './ExpenseDetails';
 
+
 // Import css file
 import './ExpenseDetails.css';
 import './AddExpenseForm.css';
+import './Expense.css';
 
 export default function Expense() {
   // State for list display
@@ -35,12 +37,12 @@ export default function Expense() {
 
   return (
     <div className="expenses-page">
+      <h1>Your Expenses</h1>
       <section className="split-view">
-        <div className="pane upper">
-          <h1>Your Expenses</h1>
+        <div className="pane left">
           <ExpenseDetails expenses={expenses} />
         </div>
-        <div className="pane lower">
+        <div className="pane right">
           <AddExpenseForm onAddExpense={handleAddExpense} />
         </div>
       </section>
