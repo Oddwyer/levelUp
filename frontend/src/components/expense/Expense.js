@@ -15,16 +15,21 @@ import './Expense.css';
 export default function Expense() {
   // State for List Display
   const [expenses, setExpenses] = useState([]);
+  // State for Boolean Values
+  const [loading, setLoading] = useState(true);
 
   // Auto-Load Expenses on Mount
   useEffect(() => {
-    ExpenseClient.getExpenses()
-      .then((expenses) => setExpenses(expenses))
-      .catch((err) => alert(err));
+    (async () => {
+      const data = await ExpenseClient.getExpenses(); // optionally pass userId
+      setExpenses(Array.isArray(data) ? data : []);
+      setLoading(false);
+    })();
   }, []);
 
-  // Refresh Handler
+  // Refresh Handler After Successful Post
   const handleAddExpense = async (expenseData) => {
+    setLoading(true);
     try {
       await ExpenseClient.addExpense({ expenseData });
       //Refresh list
@@ -33,6 +38,8 @@ export default function Expense() {
       setExpenses(refreshList || []);
     } catch (err) {
       console.error('Failed to create expenses:', err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -43,11 +50,11 @@ export default function Expense() {
       <h1>Expenses</h1>
       <section className="split-view">
         <div className="pane left">
-              {/* "Expense Details" Display */}
+          {/* "Expense Details" Display */}
           <ExpenseDetails expenses={expenses} />
         </div>
         <div className="pane right">
-             {/* "Add Expense Form" Display */}
+          {/* "Add Expense Form" Display */}
           <AddExpenseForm onAddExpense={handleAddExpense} />
         </div>
       </section>

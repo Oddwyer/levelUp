@@ -34,4 +34,4 @@
         }
       ]
 
-      module.exports = expenses;
+      module.exports = mockExpenses;

@@ -4,7 +4,7 @@ export default class RestClient {
 
   // Rest endpoint to get expenses
   static async getExpenses(userId) {
-    const url = `${RestClient.baseUrl}/expenses?userId=${userId}`;
+    const url = `${RestClient.baseUrl}/expenses?userId=${userId ? `?userId=${encodeURIComponent(userId)}` : ''}`;
     try {
       // Save Fetched Data
       const response = await fetch(url);
@@ -33,13 +33,14 @@ export default class RestClient {
       });
       // If Status Error, Throw Exception
       if (!response.ok) {
-        throw new Error('Failed to add expense');
+        const text = await resp.text().catch(() => '');
+        throw new Error(text ||'Failed to add expense');
       }
       // Return Details or Display Error
       return await response.json();
     } catch (err) {
       console.error('Error adding expense:', err);
-      return null;
+      throw err;
     }
   }
 }

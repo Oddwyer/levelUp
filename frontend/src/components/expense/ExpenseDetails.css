@@ -33,7 +33,7 @@
 }
 
 /* Category title style */
-.expense-category h3 {
+h3.expense-category {
   margin: 0;
   font-size: 1.1rem;
   color: #000000;
