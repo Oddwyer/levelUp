@@ -33,7 +33,7 @@ export default class RestClient {
       });
       // If Status Error, Throw Exception
       if (!response.ok) {
-        const text = await resp.text().catch(() => '');
+        const text = await response.text().catch(() => '');
         throw new Error(text ||'Failed to add expense');
       }
       // Return Details or Display Error
