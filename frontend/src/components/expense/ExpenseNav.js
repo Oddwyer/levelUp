@@ -1,13 +1,17 @@
 // Import React Hook
 import React, { useState } from 'react';
 
+// Import Logo
+import logo from '../../assets/levelUp-logo.png';
+
 // Import css File
 import './ExpenseNav.css';
 
-// Defining Expense NavBar Component
+// Expense NavBar Component Function
 export default function ExpenseNav() {
   const [open, setOpen] = useState(false);
 
+  // Logout Functionality
   async function handleLogout() {
     try {
       await fetch('/logout', { method: 'POST', credentials: 'include' });
@@ -17,12 +21,14 @@ export default function ExpenseNav() {
     }
   }
 
+  // NavBar Display
   return (
     <header className="expense-nav">
       <div className="expense-nav-inner">
         {/*====Left Side of Nav Bar. Note "aria" provides accessiblity for ambiguous labels.===*/}
         <a href="/" className="levelUp-brand" aria-label="LevelUp home">
           {/*Use levelUp-brand-text css class for Level Up*/}
+           <img src={logo} alt="Logo" />
           <span className="levelUp-brand-text">LevelUp</span>
           <span className="levelUp-brand-arrow" aria-hidden="true">
             <svg

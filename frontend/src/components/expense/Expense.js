@@ -1,33 +1,34 @@
-// Import React hook
+// Import React Hook
 import React, { useState, useEffect } from 'react';
-//Imported class
-import RestClient from './RestClient';
+
+// Imported Components
+import ExpenseClient from './ExpenseClient';
 import AddExpenseForm from './AddExpenseForm';
 import ExpenseDetails from './ExpenseDetails';
 
-
-// Import css file
+// Import css Files
 import './ExpenseDetails.css';
 import './AddExpenseForm.css';
 import './Expense.css';
 
+// Parent Expense Container Function (Holds Expense Details + Add Expense Form)
 export default function Expense() {
-  // State for list display
+  // State for List Display
   const [expenses, setExpenses] = useState([]);
 
-  // Auto-load expenses on mount
+  // Auto-Load Expenses on Mount
   useEffect(() => {
-    RestClient.getExpenses()
+    ExpenseClient.getExpenses()
       .then((expenses) => setExpenses(expenses))
       .catch((err) => alert(err));
   }, []);
 
-  // Refresh handler
+  // Refresh Handler
   const handleAddExpense = async (expenseData) => {
     try {
-      await RestClient.addExpense({ expenseData });
+      await ExpenseClient.addExpense({ expenseData });
       //Refresh list
-      const refreshList = await RestClient.getExpenses();
+      const refreshList = await ExpenseClient.getExpenses();
       //Set w/ list or empty array as fail-safe
       setExpenses(refreshList || []);
     } catch (err) {
@@ -35,14 +36,18 @@ export default function Expense() {
     }
   };
 
+  // Parent Expense Display
   return (
     <div className="expenses-page">
-      <h1>Your Expenses</h1>
+      {/* "Your Expense" Header */}
+      <h1>Expenses</h1>
       <section className="split-view">
         <div className="pane left">
+              {/* "Expense Details" Display */}
           <ExpenseDetails expenses={expenses} />
         </div>
         <div className="pane right">
+             {/* "Add Expense Form" Display */}
           <AddExpenseForm onAddExpense={handleAddExpense} />
         </div>
       </section>

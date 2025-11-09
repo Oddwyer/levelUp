@@ -1,14 +1,14 @@
 //Import css
 import './App.css';
-import './ExpenseNav.css';
-import './ExpenseDetails.css';
-import './AddExpenseForm.css';
+import './components/expense/ExpenseNav.css';
+import './components/expense/ExpenseDetails.css';
+import './components/expense/AddExpenseForm.css';
 
 //Import components
 import axios from 'axios';
-import ExpenseNav from './ExpenseNav';
+import ExpenseNav from './components/expense/ExpenseNav';
 import { useEffect, useState } from 'react';
-import Expense from './Expense';
+import Expense from './components/expense/Expense';
 
 function App() {
   const [users, setUsers] = useState([]);

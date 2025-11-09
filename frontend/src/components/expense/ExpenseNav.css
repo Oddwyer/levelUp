@@ -28,6 +28,11 @@
   font-weight: 900;
   font-size: 2.25rem;
 }
+
+.expense-nav .levelUp-brand img {
+  height: 35px;
+}
+
 .levelUp-brand-arrow {
   transform: translateY(5px);
   opacity: 0.9;

@@ -19,10 +19,9 @@ body {
 }
 
 .App {
-  display: grid;
-  grid-template-rows: 40% 60%;
-  /* top 40%, bottom 60% */
-  height: 100vh;
+  height: 100vh;  /* Full height of the viewport */
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {
@@ -63,8 +62,10 @@ body {
 }
 
 .app-main {
-  margin-top: var(--header-h);
-  height: calc(100vh - var(--header-h));
+  margin-top: var(--header-h);  /* Leave space for the fixed header */
+  height: calc(100vh - var(--header-h));  /* Use the remaining height after the header */
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column;
 }
 
 

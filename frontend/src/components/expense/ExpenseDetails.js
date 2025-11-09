@@ -1,18 +1,19 @@
-// This component defines display list for expenses.
+// Child - ExpenseDetails Component Function
 export default function ExpenseDetails({ expenses }) {
   return (
 
     <div className="expenses-display">
+            <h2>Your Expenses</h2>
       {expenses.length > 0 ? (
-        // Wrapper for all expense "cards" (small container for each expense)
+        // Expense Cards Wrapper (Small Container for Each Expense)
         <div className="expense-list">
-          {/* Map through each expense and render it as a card */}
+          {/* Map Through Each Expense and Render as a Card */}
           {expenses.map((expense) => (
             <div className="expense-card" key={expense.id}>
-              {/* Category shown as a title */}
+              {/* Category Title*/}
               <h3 className="expense-category">{expense.category}</h3>
 
-              {/* Expense details */}
+              {/* Expense Details Display*/}
               <p> ${Number(expense.amount).toFixed(2)}</p>
               <p> {expense.description}</p>
               <p>
@@ -28,7 +29,7 @@ export default function ExpenseDetails({ expenses }) {
           ))}
         </div>
       ) : (
-        // If there are no expenses.
+        // No Expenses Display.
         <p>No expenses to date.</p>
       )}
     </div>

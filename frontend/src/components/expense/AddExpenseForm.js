@@ -1,9 +1,10 @@
-// Import React hook
-import React, { useState, useEffect } from 'react';
+// Import React Hook
+import React, { useState } from 'react';
 
-// This component addes an expense.
+// Child - AddExpenseForm Component Function
 export default function AddExpenseForm({ onAddExpense }) {
-  // "Expense" object via form + defines "form" and "setForm"
+
+  // "Expense" Object Variables + Define Form / SetForm
   const [form, setForm] = useState({
     amount: '',
     category: '',
@@ -11,16 +12,17 @@ export default function AddExpenseForm({ onAddExpense }) {
     expense_date: '',
   });
 
+  // Changes to Expense Form Function
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // OnClick Submit
+  // OnClick Save Expense
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Create new expense object
+    // Create New Expense Object
     const expenseData = {
       amount: Number(form.amount),
       category: form.category,
@@ -28,17 +30,18 @@ export default function AddExpenseForm({ onAddExpense }) {
       expense_date: form.expense_date,
     };
 
-    //Pass to Expense.js
+    // Invoke When Receive Form from Expense.js
     await onAddExpense(expenseData);
 
-    //Reset form
+    // Reset Form
     setForm({ amount: '', category: '', description: '', expense_date: '' });
   };
 
-  // Expense form display settings
+  // Expense Form Dispay + Save Expense Button
   return (
     <div className="expense-form">
       <h2>Add Expense</h2>
+      {/* Expense Form + Invoke Submission*/}
       <form className="expense-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="amount">Amount:</label>
