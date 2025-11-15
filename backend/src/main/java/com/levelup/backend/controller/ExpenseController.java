@@ -49,5 +49,16 @@ public class ExpenseController {
 
         return expenseRepository.save(expense);
     }
-    //TODO: add deleteExpense next
+    @DeleteMapping("/{id}")
+    public String deleteExpense(@PathVariable Long id) {
+        Optional<Expense> existing = expenseRepository.findById(id);
+
+        //checks if id exists
+        if (existing.isEmpty()) {
+            throw new RuntimeException("Expense not found with ID: " + id);
+        }
+        //deletes expense that correlates with id
+        expenseRepository.deleteById(id);
+        return "Expense with ID " + id + " deleted successfully.";
+    }
 }
