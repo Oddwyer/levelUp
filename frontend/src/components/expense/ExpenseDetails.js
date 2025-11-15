@@ -3,7 +3,7 @@ export default function ExpenseDetails({ expenses }) {
   return (
 
     <div className="expenses-display">
-            <h2>Your Expenses</h2>
+            <h2>Current Expenses</h2>
       {expenses.length > 0 ? (
         // Expense Cards Wrapper (Small Container for Each Expense)
         <div className="expense-list">

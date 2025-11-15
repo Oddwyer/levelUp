@@ -1,11 +1,12 @@
 // Import React Hook
 import React, { useState } from 'react';
 
-// Child - AddExpenseForm Component Function
-export default function AddExpenseForm({ onAddExpense }) {
+// Child - ExpenseForm Component Function
+export default function ExpenseForm({ onAddExpense }) {
 
   // "Expense" Object Variables + Define Form / SetForm
   const [form, setForm] = useState({
+    id: undefined,
     amount: '',
     category: '',
     description: '',
@@ -19,6 +20,9 @@ export default function AddExpenseForm({ onAddExpense }) {
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [serverError, setServerError] = useState('');
+
+
+
 
   // Validate Proper Form Completion
   function validate(f) {
@@ -79,7 +83,7 @@ export default function AddExpenseForm({ onAddExpense }) {
   // Expense Form Dispay + Save Expense Button
   return (
     <div className="expense-form">
-      <h2>Add Expense</h2>
+      <h2>Add / Update Expense</h2>
       {/* Show top-level server error (e.g., network failure) */}
       {serverError && <div className="error">{serverError}</div>}
       {/* Expense Form + Invoke Submission*/}
