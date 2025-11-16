@@ -1,3 +1,5 @@
+import mockExpenses from "./seedData";
+
 export default class ExpenseClient {
   static baseUrl = 'http://localhost:8080/api';
 
@@ -7,6 +9,8 @@ export default class ExpenseClient {
     const url = `${ExpenseClient.baseUrl}/expenses${userId ? `?userId=${encodeURIComponent(userId)}` : ''}`;
     try {
       // Save HTTP Fetched Data (Crucial to use 'const response' in Client)
+      return mockExpenses
+
       const response = await fetch(url);
       // If status error, throw exception
       if (!response.ok) {
