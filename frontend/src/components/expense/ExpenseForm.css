@@ -8,7 +8,7 @@
   flex-direction: column;
 }
 
-/* Add Expense header */
+/* Add Expense Header */
 .expense-form h2 {
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
@@ -16,7 +16,7 @@
   font-family: var(--font-base);
 }
 
-/* Add Expense header */
+/* Expense Form Button */
 .expense-form button {
   flex: 1;
   margin-top: 1rem;
@@ -33,6 +33,17 @@
   transition:
     background-color 0.2s ease,
     transform 0.1s ease;
+}
+
+/* Save / Cancel Button Size */
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.form-actions .secondary-btn {
+  width: 100%;
 }
 
 .expense-form .form-group {
