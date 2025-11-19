@@ -3,6 +3,8 @@ package com.levelup.backend.repository;
 import com.levelup.backend.model.Budget;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BudgetRepository  extends JpaRepository<Budget, Long> {
+import java.util.List;
 
+public interface BudgetRepository  extends JpaRepository<Budget, Long> {
+    List<Budget> findByUserId(Long userId);
 }
