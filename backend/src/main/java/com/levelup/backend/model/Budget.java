@@ -1,20 +1,26 @@
 package com.levelup.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
 public class Budget {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String category;
+    @JsonProperty("monthly_limit")
     private double monthlyLimit;
+    @JsonProperty("start_date")
     private String startDate;
+    @JsonProperty("end_date")
     private String endDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     // Getters and Setters
@@ -38,24 +44,24 @@ public class Budget {
         return monthlyLimit;
     }
 
-    public void setMonthlyLimit(double monthlyLimit) {
-        this.monthlyLimit = monthlyLimit;
+    public void setMonthlyLimit(double monthly_Limit) {
+        this.monthlyLimit = monthly_Limit;
     }
 
     public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setStartDate(String start_Date) {
+        this.startDate = start_Date;
     }
 
     public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setEndDate(String end_Date) {
+        this.endDate = end_Date;
     }
 
     public User getUser() {
