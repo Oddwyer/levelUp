@@ -1,5 +1,6 @@
 package com.levelup.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String username;
     private String name;
@@ -19,6 +20,7 @@ public class User {
     private List<Expense> expenses;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Budget> budgets;
 
     public long getId() {
@@ -71,7 +73,7 @@ public class User {
         return password;
     }
 
-    public void setPassword(long id) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
