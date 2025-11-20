@@ -77,7 +77,7 @@ export default function ExpenseDetails({ expenses, onEdit, onDelete }) {
 
               {/* Transaction Date */}
               <p>
-                <strong>Date: </strong>
+                <strong>Transaction Date: </strong>
                 {formattedDate || "No Date"}
               </p>
 

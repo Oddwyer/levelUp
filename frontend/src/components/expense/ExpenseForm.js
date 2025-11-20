@@ -154,7 +154,7 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
         <div className="form-group">
           <label htmlFor="amount">Amount:</label>
           <input
-            type="number"
+            type="text"
             id="amount"
             step="0.01"
             name="amount"
