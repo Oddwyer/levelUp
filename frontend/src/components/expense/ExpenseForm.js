@@ -1,5 +1,8 @@
-// Import React Hook
-import React, { useState, useEffect } from 'react';
+// Import React Hooks & Material UI Components
+import { TextField } from '@mui/material';
+import { useState, useEffect } from 'react';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 // Child - ExpenseForm Component Function
 // Parent Class Props:
@@ -141,66 +144,79 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
 
   // Expense Form Display + Save Expense Button
   return (
-    <div className="expense-form">
+    <Box className="form-group"
+      sx={{ display: "flex", flexDirection: "column", gap: 3.5}}>
       {/* Change heading based on mode */}
-      <h2>{isEditMode ? 'Edit Expense' : 'Add Expense'}</h2>
+      <Typography sx={{ color: '#8f1321', fontWeight: 'bold', fontSize: '25px', marginTop: 1 }}>
+        {isEditMode ? 'Edit Expense' : 'Add Expense'}
+      </Typography>
 
       {/* Show top-level server error (e.g., network failure) */}
       {serverError && <div className="error">{serverError}</div>}
 
       {/* Expense Form + Invoke Submission*/}
       <form className="expense-form" onSubmit={handleSubmit}>
+
         {/* Expense Amount Field */}
-        <div className="form-group">
-          <label htmlFor="amount">Amount:</label>
-          <input
-            type="number"
-            id="amount"
-            step="0.01"
-            name="amount"
-            value={form.amount}
-            onChange={handleChange}
-          />
-        </div>
+        <Typography sx={{ color: 'brand-black', fontWeight: 'bold' }}>
+          Amount:
+        </Typography>
+        <TextField className='input' sx={{ display: "flex", flexDirection: "column", gap: 3.5, marginTop: 1, marginBottom: 2 }}
+          label=""
+          type="number"
+          id="amount"
+          name="amount"
+          value={form.amount}
+          onChange={handleChange}
+          required
+        />
         {/* Inline Field Validation Message */}
         {errors.amount && <p className="error">{errors.amount}</p>}
 
         {/* Expense Category Field */}
-        <div className="form-group">
-          <label htmlFor="category">Category:</label>
-          <input
-            type="text"
-            id="category"
-            name="category"
-            value={form.category}
-            onChange={handleChange}
-          />
-        </div>
+        <Typography sx={{ color: 'brand-black', fontWeight: 'bold' }}>
+          Category:
+        </Typography>
+        <TextField className='input' sx={{ display: "flex", flexDirection: "column", gap: 3.5, marginTop: 1, marginBottom: 2 }}
+          label=""
+          type="text"
+          id="category"
+          name="category"
+          value={form.category}
+          onChange={handleChange}
+          required
+
+        />
+
         {/* Inline Field Validation Message */}
         {errors.category && <p className="error">{errors.category}</p>}
 
         {/* Expense Description Field */}
-        <div className="form-group">
-          <label htmlFor="description">Description:</label>
-          <textarea
-            id="description"
-            name="description"
-            value={form.description}
-            onChange={handleChange}
-          />
-        </div>
+        <Typography sx={{ color: 'brand-black', fontWeight: 'bold' }}>
+          Description:
+        </Typography>
+        <TextField className='input' sx={{ display: "flex", flexDirection: "column", marginTop: 1, marginBottom: 2 }}
+          label=""
+          id="description"
+          name="description"
+          value={form.description}
+          onChange={handleChange}
+        />
 
         {/* Expense Date Field */}
-        <div className="form-group">
-          <label htmlFor="expense_date">Transaction Date:</label>
-          <input
-            type="date"
-            id="expense_date"
-            name="expense_date"
-            value={form.expense_date}
-            onChange={handleChange}
-          />
-        </div>
+        <Typography sx={{ color: 'brand-black', fontWeight: 'bold' }}>
+          Transaction Date:
+        </Typography>
+        <TextField className='input' sx={{ display: "flex", flexDirection: "column", gap: 3.5, marginTop: 1, marginBottom: 2 }}
+          label=""
+          type="date"
+          id="expense_date"
+          name="expense_date"
+          value={form.expense_date}
+          onChange={handleChange}
+          required
+        />
+
         {/* Inline Field Validation Message */}
         {errors.expense_date && <p className="error">{errors.expense_date}</p>}
 
@@ -209,7 +225,7 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
             {isEditMode ? 'Update Expense' : 'Save Expense'}
           </button>
 
-          {/* Show Cancel only when editing */}
+          {/* Show Cancel Only when Editing */}
           {isEditMode && onCancelEdit && (
             <button
               type="button"
@@ -221,7 +237,7 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
             </button>
           )}
         </div>
-      </form>
-    </div>
+      </form >
+    </Box >
   );
 }
