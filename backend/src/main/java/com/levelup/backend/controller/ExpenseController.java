@@ -1,7 +1,10 @@
 package com.levelup.backend.controller;
 
+import com.levelup.backend.model.DTO.ExpenseDTO;
 import com.levelup.backend.model.Expense;
+import com.levelup.backend.model.User;
 import com.levelup.backend.repository.ExpenseRepository;
+import com.levelup.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,12 +19,27 @@ public class ExpenseController {
 
     @Autowired
     private ExpenseRepository expenseRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping
-    public Expense addExpense(@RequestBody Expense expense) {
+    public Expense addExpense(@RequestBody ExpenseDTO expenseDTO) {
+        Expense expense = new Expense();
+        expense.setAmount(expenseDTO.getAmount());
+        expense.setCategory(expenseDTO.getCategory());
+        expense.setDescription(expenseDTO.getDescription());
+        expense.setExpenseDate(expenseDTO.getExpenseDate());
+
+        if (expenseDTO.getUserId() != null) {
+            User user = userRepository.findById(expenseDTO.getUserId())
+                    .orElseThrow(() -> new RuntimeException("User not found: " + expenseDTO.getUserId()));
+            expense.setUser(user);
+        } else {
+            throw new RuntimeException("userId is required for creating an expense");
+        }
+
         return expenseRepository.save(expense);
     }
-
     @GetMapping
     public List<Expense> getExpenses(@RequestParam(required = false) Long userId) {
         // If user ID provided, filter by user

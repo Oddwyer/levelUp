@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class Expense {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private double amount;
     private String category;
