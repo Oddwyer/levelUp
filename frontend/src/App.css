@@ -1,5 +1,27 @@
+:root {
+  --brand-red: #a41727;
+  --brand-red-dark: #8f1321;
+  --brand-pink: #ff747b;
+  --brand-black: #00000;
+  --brand-gray: #333333;
+  --brand-white: #ffffff;
+  --border-white: rgba(255, 255, 255, 0.45);
+  --radius-pill: 999px;
+  --maxw: 1200px;
+  --font-base: 'Montserrat', sans-serif;
+  --header-h: 72px;
+}
+
+body {
+  font-family: var(--font-base);
+  color: #000;
+  margin: 0;
+}
+
 .App {
-  text-align: center;
+  height: 100vh;  /* Full height of the viewport */
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {
@@ -15,7 +37,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: var(--header-h);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,11 +50,40 @@
   color: #61dafb;
 }
 
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-h);
+  z-index: 1000;
+  align-items: center;
+}
+
+.app-main {
+  margin-top: var(--header-h);  /* Leave space for the fixed header */
+  height: calc(100vh - var(--header-h));  /* Use the remaining height after the header */
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Delete + Edit Expense Icons */
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
 }

@@ -1,38 +1,34 @@
-import logo from './logo.svg';
+//Import css
 import './App.css';
-import axios from "axios";
+import './components/expense/ExpenseNav.css';
+import './components/expense/ExpenseDetails.css';
+import './components/expense/Expense.css';
 
+//Import components
+import axios from 'axios';
+import ExpenseNav from './components/expense/ExpenseNav';
 import { useEffect, useState } from 'react';
-
+import Expense from './components/expense/Expense';
 
 function App() {
-  
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([]);
 
-  useEffect(()=> {
+  useEffect(() => {
     loadUsers();
-  },[])
+  }, []);
 
-  const loadUsers = async()=> {
-    const result = await axios.get("http://localhost:8080/users");
+  const loadUsers = async () => {
+    const result = await axios.get('http://localhost:8080/api/users');
     console.log(result);
-  }
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className="site-header">
+        <ExpenseNav />
       </header>
+      <main className="app-main">
+        <Expense />
+      </main>
     </div>
   );
 }
