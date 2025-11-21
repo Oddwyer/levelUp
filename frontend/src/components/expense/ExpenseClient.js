@@ -4,13 +4,10 @@ export default class ExpenseClient {
   static baseUrl = 'http://localhost:8080/api';
 
 
-  // Rest Endpoint - GET Expenses
+  // Rest Endpoint - GET e
   static async getExpenses(userId) {
     const url = `${ExpenseClient.baseUrl}/expenses${userId ? `?userId=${encodeURIComponent(userId)}` : ''}`;
     try {
-      // Save HTTP Fetched Data (Crucial to use 'const response' in Client)
-      return mockExpenses
-
       const response = await fetch(url);
       // If status error, throw exception
       if (!response.ok) {
@@ -24,23 +21,23 @@ export default class ExpenseClient {
     }
   }
 
-  // Rest Endpoint - POST Expense
+  // Rest Endpoint - POST expense
   static async addExpense(expense) {
     const url = `${ExpenseClient.baseUrl}/expenses`;
     try {
-      // Save HTTP Fetched Data
+      // Save HTTP fetched data
       const response = await fetch(url, {
-        // Post Requirements
+        // Post requirements
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(expense),
       });
-      // If Status Error, Throw Exception
+      // If status error, throw exception
       if (!response.ok) {
         const text = await response.text().catch(() => '');
         throw new Error(text || "Failed to add expense");
       }
-      // Return Extracted JSON Created Expense Object or Display Error
+      // Return extracted JSON from created expense object or display error
       return await response.json();
     } catch (err) {
       console.error("Error adding expense:", err);
@@ -49,23 +46,23 @@ export default class ExpenseClient {
   }
 
 
-  // Rest Endpoint - PUT Expense
+  // Rest Endpoint - PUT expense
   static async updateExpense(id, expense) {
     const url = `${ExpenseClient.baseUrl}/expenses/${encodeURIComponent(id)}`;
     try {
-      // Save HTTP Fetched Data
+      // Save HTTP fetched data
       const response = await fetch(url, {
-        // Put Requirements
+        // Put requirements
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(expense),
       });
-      // If Status Error, Throw Exception
+      // If status error, throw exception
       if (!response.ok) {
         const text = await response.text().catch(() => '');
         throw new Error(text || "Failed to update expense");
       }
-      // Return Extracted JSON Expense Object or Display Error
+      // Return extracted JSON from expense object or display error
       return await response.json();
     } catch (err) {
       console.error("Error updating expense:", err);
@@ -74,24 +71,24 @@ export default class ExpenseClient {
   }
 
 
-  // Rest Endpoint - DELETE Expense
+  // Rest Endpoint - DELETE expense
   static async deleteExpense(id) {
     const url = `${ExpenseClient.baseUrl}/expenses/${encodeURIComponent(id)}`;
     try {
-      // Save HTTP Fetched Data
+      // Save HTTP fetched data
       const response = await fetch(url, {
-        // Delete Requirements
+        // Delete requirements
         method: 'DELETE'
       });
-      // If Status Error, Throw Exception
+      // If status error, throw exception
       if (!response.ok) {
         const text = await response.text().catch(() => '');
         throw new Error(text || "Failed to delete expense");
       }
-      // If No JSON Content on Delete
+      // If no JSON content on delete (common)
       if (response.status === 204) return true;
       
-      // Else, If JSON Content on Delete
+      // Else, if JSON content on delete (uncommon)
       try {
         return await response.json();
       } catch {
