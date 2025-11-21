@@ -1,12 +1,10 @@
-// Child - ExpenseDetails Component Function
-
-
 // Parent Class Props:
 // - expenses: array of expense objects to display
-// - onEdit:   function(expense) -> called when user clicks "Edit" on a card
+// - onUpdate:   function(expense) -> called when user clicks "Edit" on a card
 // - onDelete: function(id)      -> called when user clicks "Delete" on a card
 
-export default function ExpenseDetails({ expenses, onEdit, onDelete }) {
+// Child - ExpenseDetails Component Function
+export default function ExpenseDetails({ expenses, onUpdate, onDelete }) {
   return (
     <div className="expenses-display">
       <h2>Current Expenses</h2>
@@ -81,30 +79,23 @@ export default function ExpenseDetails({ expenses, onEdit, onDelete }) {
                 {formattedDate || "No Date"}
               </p>
 
-              {/* Created-at Info */}
-              {createdAtText && (
-                <p>
-                  <small>Added on: {createdAtText}</small>
-                </p>
-              )}
-
               {/* Action Buttons: Update + Delete */}
               <div className="card-actions">
                 <button
                   type="button"
-                  className="edit-expense-btn"
-                  // Call to Edit Handler w/ Whole Expense Object
-                  onClick={() => onEdit && onEdit(expense)}
-                  aria-label={`Edit expense ${category || ''}`}
+                  className="update-expense-btn"
+                  // onUpdate && confirms onUpdate() exists before invoking (error checking)
+                  onClick={() => onUpdate && onUpdate(expense)}
+                  aria-label={`Update expense ${category || ''}`}
                 >
                   <span className="material-symbols-outlined">edit</span>
-                  Edit
+                  Update
                 </button>
 
                 <button
                   type="button"
                   className="delete-expense-btn"
-                  // Call to Delete handler via ID
+                  // onDelete && confirms onUpdate() exists before invoking (error checking)
                   onClick={() => onDelete && onDelete(id)}
                   aria-label={`Delete expense ${category || ''}`}
                 >

@@ -18,7 +18,7 @@
   align-items: center;
 }
 
-/* Brand (Left)*/
+/* ---------Left: Logo + Branding----------*/
 .levelUp-brand {
   display: inline-flex;
   align-items: center;
@@ -38,7 +38,7 @@
   opacity: 0.9;
 }
 
-/* ---------- Center nav links ---------- */
+/* ---------- Center: Navigation ---------- */
 .expense-links {
   display: flex;
   justify-content: center;
@@ -59,10 +59,11 @@
   text-decoration-color: var(--brand-pink);
 }
 
-/* ---------- Right-side button ---------- */
+/* ---------- Right: Log-out ---------- */
 .expense-logout {
   justify-self: end;
 }
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -76,11 +77,13 @@
   background: transparent;
   transition: all 0.2s ease;
 }
+
 .btn--outline {
   color: var(--brand-white);
   background-color: transparent;
   border: 2px solid var(--brand-white);
 }
+
 .btn--outline:hover {
   background: var(--brand-pink);
   color: var(--brand-white);
