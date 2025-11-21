@@ -1,12 +1,12 @@
 // Import React Hook
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-// Child - ExpenseForm Component Function
 // Parent Class Props:
 // - initialData: Expense Object to Update (Null for Add)
 // - onSubmit:    function(expenseData) -> Parent handles Add or Update
 // - onCancelEdit: function() -> Exit edit mode, return to "Add" mode
 
+// Child - ExpenseForm Component Function
 export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
   // "Expense" Object Variables + Define Form / SetForm
   const [form, setForm] = useState({
@@ -20,13 +20,12 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
   // Error Catching / Boolean Variables
   // Errors: An object holding field-specific validation messages
   const [errors, setErrors] = useState({});
-  // Submitting: True while we're waiting for backend response (disables button/spinner)
-  const [submitting, setSubmitting] = useState(false);
+
   // ServerError: Message shown when the backend fails (network, validation, etc.)
   const [serverError, setServerError] = useState('');
+  
   // Update / Add Boolean: Are we editing existing expense or adding new?
   const isEditMode = Boolean(form.id);
-
 
 
   useEffect(() => {
@@ -58,7 +57,7 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
   }, [initialData]);
 
 
-  // Validate Form Completion
+  // Function - Validate Form Completion
   function validate(f) {
     const e = {};
     if (!f.amount || Number.isNaN(Number(f.amount)) || Number(f.amount) <= 0) {
@@ -73,7 +72,7 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
     return e;
   }
 
-  // Changes to Expense Form Function
+  // Function - Changes to Expense Form
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -84,7 +83,7 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
     });
   };
 
-  // OnClick Add / Update Expense
+  // Function - Submit Add / Update Expense
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Clear Old Errors
@@ -96,9 +95,6 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
 
     // If Invalid - Stop
     if (Object.keys(v).length) return;
-
-    // If Valid - Continue
-    setSubmitting(true);
 
     try {
       //2. Create New Expense Object from Fields
@@ -133,10 +129,7 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
       }
     } catch (err) {
       setServerError(err.message || 'Failed to save expense.');
-    } finally {
-      // Reset Submission Boolean Value
-      setSubmitting(false);
-    }
+    } 
   };
 
   // Expense Form Display + Save Expense Button
@@ -205,17 +198,16 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
         {errors.expenseDate && <p className="error">{errors.expenseDate}</p>}
 
         <div className="form-actions">
-          <button type="submit" disabled={submitting}>
+          <button type="submit" >
             {isEditMode ? 'Update Expense' : 'Save Expense'}
           </button>
 
-          {/* Show Cancel only when editing */}
+          {/* Show Cancel Only When Edit Mode*/}
           {isEditMode && onCancelEdit && (
             <button
               type="button"
               className="secondary-btn"
               onClick={onCancelEdit}
-              disabled={submitting}
             >
               Cancel
             </button>

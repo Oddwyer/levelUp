@@ -35,7 +35,7 @@
     transform 0.1s ease;
 }
 
-/* Save / Cancel Button Size */
+/* Save / Cancel Buttons */
 .form-actions {
   display: flex;
   flex-direction: column;
@@ -46,6 +46,7 @@
   width: 100%;
 }
 
+/* Expense Form */
 .expense-form .form-group {
   display: flex;
   align-items: center;
@@ -54,7 +55,7 @@
   margin-bottom: 1rem;
 }
 
-/* Form Labels */
+/* Expense Form Labels */
 .expense-form label {
   width: 150px;
   /* optional: keeps boxes from getting too wide */
@@ -65,7 +66,7 @@
   font-weight: 600;
 }
 
-/* Form Fields */
+/*Expense Form Fields */
 .expense-form input,
 .expense-form textarea {
   flex: 1;
@@ -79,5 +80,5 @@
   /* subtle shadow for depth */
 
 }
-
+/* Expense Form Errors*/
 .error { color: #b00020; font-size: 0.95rem; margin: -0.5rem 0 0.75rem 0; }
