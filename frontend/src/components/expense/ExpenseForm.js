@@ -23,13 +23,15 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
   // Error Catching / Boolean Variables
   // Errors: An object holding field-specific validation messages
   const [errors, setErrors] = useState({});
+
   // Submitting: True while we're waiting for backend response (disables button/spinner)
   const [submitting, setSubmitting] = useState(false);
+
   // ServerError: Message shown when the backend fails (network, validation, etc.)
   const [serverError, setServerError] = useState('');
+
   // Update / Add Boolean: Are we editing existing expense or adding new?
   const isEditMode = Boolean(form.id);
-
 
 
   useEffect(() => {
@@ -76,7 +78,7 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
     return e;
   }
 
-  // Changes to Expense Form Function
+  // Function - Changes to Expense Form
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -87,7 +89,7 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
     });
   };
 
-  // OnClick Add / Update Expense
+  // Function - Submit Add / Update Expense
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Clear Old Errors

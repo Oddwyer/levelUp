@@ -13,6 +13,7 @@ import logo from '../../assets/levelUp-logo.png';
 // Import css File
 import './ExpenseNav.css';
 
+// Website Pages
 const pages = ['Expense', 'Budget', 'Dashboard',];
 
 // Expense NavBar Component Function
@@ -34,7 +35,7 @@ export default function ExpenseNav() {
   };*/
 
 
-  // Logout Functionality
+  // Function - Logout
   async function handleLogout() {
     try {
       await fetch('/logout', { method: 'POST', credentials: 'include' });
@@ -46,9 +47,9 @@ export default function ExpenseNav() {
 
   // NavBar Display
   return (
-    // AppBar is the top-level navigation bar container
+    // Top-level navigation bar container
     <AppBar className="expense-nav" position="static" sx={{ backgroundColor: '#a41727' }}>
-      {/* Toolbar horizontally aligns items inside the AppBar */}
+      {/* Toolbar - horizontally aligns items inside the AppBar */}
       <Toolbar className="expense-nav-inner" disableGutters>
 
         {/** -------------------------------------------------------------- */}

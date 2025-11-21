@@ -15,14 +15,14 @@
 }
 
 
-/* Lays out cards in a list */
+/* List css */
 .expense-list {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-
+/*Expense List Buttons*/
 .expense-list button {
   margin: .5rem;
   width: 100px;

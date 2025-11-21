@@ -12,7 +12,7 @@
   background-position: center center;
 }
 
-/*"Your Expenses" header */ 
+/*"Expenses" header */ 
 .expenses-page h1 {
   font-size: 2rem;
   color: var(--brand-red-dark);
@@ -22,7 +22,7 @@
   z-index: 10; /* Ensure header stays on top */
 }
 
-/* Expense Split View - Holds panes) */
+/* Expense Split View - Holds panes */
 .split-view {
   display: flex; /* Flexbox aligns panes side by side */
   flex-direction: row; /* Left and right panels should be next to each other */
@@ -41,12 +41,12 @@
 
 /* Left Pane Styling + Specs - Allow scrolling */
 .pane.left {
-  overflow-y: hidden;  /* Prevent scrolling */
+  overflow-y: hidden;  
   flex: 1;
 }
 
-/* Right Pane Styling  + Sepcs - Prevent scrolling */
+/* Right Pane Styling + Specs - Prevent scrolling */
 .pane.right {
-  overflow: hidden;   /* Prevent scrolling */
+  overflow: hidden;   
   flex: 1;
 }
