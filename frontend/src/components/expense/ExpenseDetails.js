@@ -29,16 +29,16 @@ export default function ExpenseDetails({ expenses, onEdit, onDelete }) {
             amount,
             category,
             description,
-            expense_date,
+            expenseDate,
             created_at,
           } = expense;
 
           // Safely Format Transaction Date
           let formattedDate = '';
-          if (expense_date) {
-            const d = new Date(expense_date);
+          if (expenseDate) {
+            const d = new Date(expenseDate);
             formattedDate = isNaN(d.getTime())
-              ? String(expense_date) // If Invalid Date, Show Raw Value
+              ? String(expenseDate) // If Invalid Date, Show Raw Value
               : d.toLocaleDateString();
           }
 
@@ -54,7 +54,7 @@ export default function ExpenseDetails({ expenses, onEdit, onDelete }) {
 
           return (
             <div className="expense-card"
-              key={id ?? `${category}-${amount}-${expense_date}`}>
+              key={id ?? `${category}-${amount}-${expenseDate}`}>
               {/* Category Title*/}
               <h3 className="expense-category">
                 {category || "Uncategorized"}
@@ -77,7 +77,7 @@ export default function ExpenseDetails({ expenses, onEdit, onDelete }) {
 
               {/* Transaction Date */}
               <p>
-                <strong>Date: </strong>
+                <strong>Transaction Date: </strong>
                 {formattedDate || "No Date"}
               </p>
 

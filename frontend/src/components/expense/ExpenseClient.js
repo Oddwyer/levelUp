@@ -8,9 +8,6 @@ export default class ExpenseClient {
   static async getExpenses(userId) {
     const url = `${ExpenseClient.baseUrl}/expenses${userId ? `?userId=${encodeURIComponent(userId)}` : ''}`;
     try {
-      // Save HTTP Fetched Data (Crucial to use 'const response' in Client)
-      return mockExpenses
-
       const response = await fetch(url);
       // If status error, throw exception
       if (!response.ok) {
@@ -28,6 +25,7 @@ export default class ExpenseClient {
   static async addExpense(expense) {
     const url = `${ExpenseClient.baseUrl}/expenses`;
     try {
+      expense.userId = 1
       // Save HTTP Fetched Data
       const response = await fetch(url, {
         // Post Requirements

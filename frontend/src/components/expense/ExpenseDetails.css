@@ -14,6 +14,47 @@
   font-family: var(--font-base);
 }
 
+/* Expense Edit Button */
+.edit-expense-btn {
+  width: 110px;
+  margin-top: 1rem;
+  /* Adds vertical space before the button */
+  padding: 0.15rem 1rem;
+  margin-right: 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--brand-gray);
+  color: white;
+  font-family: var(--font-base);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+/* Expense Delete Button */
+.delete-expense-btn {
+  width: 110px;
+  margin-top: 1rem;
+  /* Adds vertical space before the button */
+  padding: 0.15rem 1rem;
+  margin-right: 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--brand-gray);
+  color: white;
+  font-family: var(--font-base);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
 
 /* Lays out cards in a list */
 .expense-list {
@@ -35,7 +76,7 @@
 /* Category title style */
 h3.expense-category {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   color: #000000;
   font-family: var(--font-base);
   text-decoration: underline;
