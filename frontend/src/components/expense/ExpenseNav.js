@@ -1,11 +1,6 @@
 // Imports React & Material UI
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-//import { useNavigate } from 'react-router-dom';
-
+import {AppBar, Box, Toolbar, Typography, Button} from '@mui/material';
+// import { useNavigate } from 'react-router-dom';
 
 // Import Logo
 import logo from '../../assets/levelUp-logo.png';
@@ -19,7 +14,7 @@ const pages = ['Expense', 'Budget', 'Dashboard',];
 // Expense NavBar Component Function
 export default function ExpenseNav() {
 
-  /* Nav Bar Functionality
+  /* Nav Bar Functionality ---> Johny + Alex Make Operational
   const navigate = useNavigate();
 
   function handlePage() {
@@ -45,12 +40,12 @@ export default function ExpenseNav() {
     }
   }
 
-  // NavBar Display
+  // Top Navigation Bar Display
   return (
     // Top-level navigation bar container
-    <AppBar className="expense-nav" position="static" sx={{ backgroundColor: '#a41727' }}>
-      {/* Toolbar - horizontally aligns items inside the AppBar */}
-      <Toolbar className="expense-nav-inner" disableGutters>
+    <AppBar className="expense-nav">
+      {/* Toolbar - Content Layout Helper in AppBar */}
+      <Toolbar className="expense-nav-inner">
 
         {/** -------------------------------------------------------------- */}
         {/**  LEFT SIDE — LOGO + LEVELUP NAME + ARRO                        */}
@@ -63,9 +58,12 @@ export default function ExpenseNav() {
             alt="LevelUp logo"
             className="levelUp-logo"
           />
+          {/* LevelUp Text */}
           <Typography className="levelUp-brand-text">
             LevelUp
           </Typography>
+
+          {/* LevelUp Arrow (Google Icons) */}
           <Typography className="levelUp-brand-arrow">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -83,13 +81,12 @@ export default function ExpenseNav() {
         {/**  CENTER NAVIGATION LINKS                                       */}
         {/** -------------------------------------------------------------- */}
 
-        {/* Desktop nav menu - shown only on md+ screens */}
-        <Box className='expense-links' aria-label='Primary Navigation' sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
+        <Box className='expense-links' aria-label='Primary Navigation'>
           {/* Loop through pages and create a button for each */}
           {pages.map((page) => (
-            <Button sx={{ padding: 5, my: 2, color: 'white', margin: .5, fontWeight: 'bold', '&:hover': { textDecoration: 'underline' } }}
+            <Button className='expense-links-text'
               key={page}
-            //onClick={() => handlePage(page)}
+            //onClick={() => handlePage(page)} -----> Johny + Alex Make Operational
             >
               {page}
             </Button>
@@ -100,13 +97,10 @@ export default function ExpenseNav() {
         {/**  RIGHT LOG-OUT BUTTON                                          */}
         {/** -------------------------------------------------------------- */}
 
-        <Box className='expense-logout' sx={{
-          display: 'flex', justifyContent: 'flex-end', marginleft: 'auto',
-          alignItems: 'center'
-        }}>
-          <button className="btn btn--outline" href="#!" onClick={handleLogout}>
+        <Box className='expense-logout'>
+          <Button className="logout-btn logout-btn-outline" href="#!" onClick={handleLogout}>
             Log Out
-          </button>
+          </Button>
         </Box>
       </Toolbar>
     </AppBar >

@@ -1,5 +1,5 @@
 /*Expense page backdrop (below nav bar) */
-.expenses-page {
+.MuiBox-root.expenses-page {
   margin-top: var(--header-h);
   padding: 0 1.5rem;
   position: fixed;
@@ -12,18 +12,20 @@
   background-position: center center;
 }
 
-/*"Expenses" header */ 
-.expenses-page h1 {
+/*"Expenses" Header */ 
+.MuiTypography-root.expense-page-header {
   font-size: 2rem;
-  color: var(--brand-red-dark);
+  color: var(--brand-black);
   text-align: left;
+  font-family: var(--font-base);
+  font-weight: bold;
   margin-top: 20px;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
   z-index: 10; /* Ensure header stays on top */
 }
 
-/* Expense Split View - Holds panes */
-.split-view {
+/* Expense Split View - Holds Panes */
+.MuiBox-root.split-view {
   display: flex; /* Flexbox aligns panes side by side */
   flex-direction: row; /* Left and right panels should be next to each other */
   height: calc(100vh - var(--header-h)); /* Full height minus the header height */
@@ -32,21 +34,21 @@
 }
 
 /* Universal Pane Styling + Specs */
-.pane {
+.MuiBox-root.pane {
   position: relative; /* For positioning child elements inside the panes */
-  padding: 1rem; /* Padding for content inside the pane */
+  padding: 1rem; 
   height: 100%;
 }
 
 
 /* Left Pane Styling + Specs - Allow scrolling */
-.pane.left {
+.MuiBox-root.pane-left {
   overflow-y: hidden;  
   flex: 1;
 }
 
 /* Right Pane Styling + Specs - Prevent scrolling */
-.pane.right {
+.MuiBox-root.pane-right {
   overflow: hidden;   
   flex: 1;
 }

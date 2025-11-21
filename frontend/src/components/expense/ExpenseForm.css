@@ -1,25 +1,63 @@
-/* Overall container for the display section */
-.expense-form {
+/* Universal Form css */
+.MuiFormControl--root.expense-form {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  /* space between label and input */
+  margin-bottom: 1rem;
+}
+
+/* Form Box css */
+.MuiBox-root.expense-form-box {
+  flex-direction: column;
   max-width: 800px;
   /* keeps layout from stretching too wide */
   padding: 0 1.5rem;
   /* adds breathing room around content */
   display: flex;
   flex-direction: column;
+
 }
 
-/* Add Expense Header */
-.expense-form h2 {
-  margin-bottom: 1.5rem;
+/* Add / Update Expense Header */
+.MuiTypography-root.form-header {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   font-size: 1.5rem;
   color: var(--brand-red-dark);
   font-family: var(--font-base);
+  font-weight: bold;
 }
 
+/* Form Labels */
+.MuiTypography-root.field-labels {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: var(--brand-black);
+  font-family: var(--font-base);
+  font-weight: bold;
+}
 
-/*-----Expense Form Buttons------*/
-.expense-form button {
+/*Form Fields */
+.MuiTextField-root.input {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  gap: 3.5;
+  /* space between label and input */
+  margin-bottom: 2rem;
+  font-family: var(--font-base);
+}
+
+/* Save / Cancel Buttons */
+.MuiButtonBase-root.submit-btn,
+.MuiButtonBase-root.cancel-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
   flex: 1;
+  width: 100%;
   margin-top: 1rem;
   /* Adds vertical space before the button */
   padding: 0.6rem 1.2rem;
@@ -36,27 +74,6 @@
     transform 0.1s ease;
 }
 
-/* Save Button */
-.form-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-/* Save / Cancel Cancel Button Size */
-.form-actions .secondary-btn {
-  width: 100%;
-}
-
-/*---------Form------------*/
-/* Global Form css */
-.expense-form .form-group {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  /* space between label and input */
-  margin-bottom: 1rem;
-}
 
 /* Form Labels */
 .expense-form label {
@@ -70,7 +87,7 @@
 }
 
 /* Form Fields */
-.input{
+.input {
   flex: 1;
   padding-bottom: 1.5rem;
   padding-top: 1.5rem;
@@ -86,4 +103,8 @@
 }
 
 /* Form Errors */
-.error { color: #b00020; font-size: 0.95rem; margin: -0.5rem 0 0.75rem 0; }
+.error {
+  color: #b00020;
+  font-size: 0.95rem;
+  margin: -0.5rem 0 0.75rem 0;
+}

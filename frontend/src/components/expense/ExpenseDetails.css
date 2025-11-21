@@ -1,29 +1,55 @@
-/* Overall container for the display section */
-.expenses-display {
-  max-width: 800px; /* keeps layout from stretching too wide */
-  padding: 0 1.5rem; /* adds breathing room around content */
+/* Expense Details Container */
+.MuiBox-root.expenses-display {
+  max-width: 800px;
   overflow-y: scroll;
-  max-height: calc(100% - 125px); /* Ensure it fills the height of its parent */
+  max-height: calc(100% - 125px);
+  /* Ensure it fills the height of its parent */
 }
 
-/* Add Expense header */
-.expenses-display h2 {
+/* Current Expenses Header */
+.MuiTypography-root.list-header {
+  margin-top: 1rem;
   margin-bottom: 1rem;
   font-size: 1.5rem;
   color: var(--brand-red-dark);
   font-family: var(--font-base);
+  font-weight: bold;
 }
 
 
-/* List css */
-.expense-list {
+/* Expense List Box */
+.MuiBox-root.expense-list {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
+/* Each Line Item Box */
+.MuiBox-root.line-item-box {
+  display: flex;
+  align-items: center;
+  padding: .5rem 0rem;
+}
+
+/* Each Line Item Box */
+.MuiTypography-root.expense-category {
+  color: var(--brand-black);
+  font-weight: bold;
+  font-family: var(--font-base);
+  font-size: 20px;
+  text-decoration: underline;
+}
+
+
+/* Each Line Item Box */
+.MuiTypography-root.line-item-text {
+  color: var(--brand-black);
+  font-weight: bold;
+  font-family: var(--font-base);
+}
+
 /*Expense List Buttons*/
-.expense-list button {
+.MuiButton-root.update-expense-btn,  .MuiButton-root.delete-expense-btn  {
   margin: .5rem;
   width: 100px;
   padding: 0.5rem 1rem;
@@ -40,4 +66,3 @@
     background-color 0.2s ease,
     transform 0.1s ease;
 }
-

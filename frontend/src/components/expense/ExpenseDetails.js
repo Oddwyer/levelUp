@@ -1,9 +1,4 @@
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import {Box, Card, CardActions, CardContent, Button, Typography} from '@mui/material';
 
 // Parent Class Props:
 // - expenses: array of expense objects to display
@@ -13,9 +8,9 @@ import Typography from '@mui/material/Typography';
 // Child - ExpenseDetails Component Function
 export default function ExpenseDetails({ expenses, onUpdate, onDelete }) {
   return (
-    <div className="expenses-display">
-      {/* Section Title */}
-      <Typography sx={{ color: '#8f1321', fontWeight: 'bold', fontSize: '25px', marginTop: 1, marginBottom: 1 }}>
+    <Box className="expenses-display">
+      {/* Expense List Header */}
+      <Typography className='list-header'>
         Current Expenses
       </Typography>
 
@@ -26,7 +21,7 @@ export default function ExpenseDetails({ expenses, onUpdate, onDelete }) {
 
       {/* Else, If Expenses, Display the list of cards */}
       {expenses && expenses.length > 0 && (
-        <div className="expense-list">
+        <Box className="expense-list">
           {/* Loop Through Each Expense and Render as a Card */}
           {expenses.map((expense) => {
             // Destructure Expense Object (Defensive Programming)
@@ -59,73 +54,35 @@ export default function ExpenseDetails({ expenses, onUpdate, onDelete }) {
 
             return (
               // Card for Each Expense
-              <Card
-                className="expense-card"
-                sx={{ maxWidth: 600 }}
+              <Card className="expense-card" sx={{ maxWidth: 600 }}
                 key={id ?? `${category}-${amount}-${expenseDate}`}
               >
                 <CardContent>
                   {/* Category Title*/}
-                  <Typography
-                    className="expense-category"
-                    sx={{
-                      color: 'brand-black',
-                      fontSize: '20px',
-                      fontWeight: 'bold',
-                      textDecoration: 'underline',
-                    }}
-                  >
+                  <Typography className="expense-category">
                     {category || 'Uncategorized'}
                   </Typography>
 
                   {/* Amount */}
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      paddingTop: 1
-                    }}>
-                    <Typography
-                      sx={{
-                        color: 'brand-black',
-                        fontWeight: 'bold'
-                      }}>
+                  <Box className='line-item-box'>
+
+                    <Typography className='line-item-text'>
                       Amount:&nbsp;
                     </Typography>
-                    ${amount != null && amount !== ''
-                      ? Number(amount).toFixed(2)
-                      : '0.00'}
+                    ${amount != null && amount !== ''? Number(amount).toFixed(2): '0.00'}
                   </Box>
 
                   {/* Description */}
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      paddingTop: 1
-                    }}>
-                    <Typography
-                      sx={{
-                        color: 'brand-black',
-                        fontWeight: 'bold'
-                      }}>
+                  <Box className='line-item-box'>
+                    <Typography className='line-item-text'>
                       Description:&nbsp;
                     </Typography>
                     {description ? description : ''}
                   </Box>
 
                   {/* Transaction Date */}
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      paddingTop: 1
-                    }}>
-                    <Typography
-                      sx={{
-                        color: 'brand-black',
-                        fontWeight: 'bold'
-                      }}>
+                  <Box className='line-item-box'>
+                    <Typography className='line-item-text'>
                       Transaction Date:&nbsp;
                     </Typography>
                     {formattedDate || 'No Date'}
@@ -134,21 +91,19 @@ export default function ExpenseDetails({ expenses, onUpdate, onDelete }) {
 
                 {/* Action Buttons: Update + Delete */}
                 <CardActions className="card-actions">
-                  <button
+                  <Button className="update-expense-btn"
                     type="button"
-                    className="edit-expense-btn"
                     //onUpdate && confirms method exists before invoking (error-checking)
                     onClick={() => onUpdate && onUpdate(expense)}
-                    aria-label={`Edit expense ${category || ''}`}
+                    aria-label={`Update expense ${category || ''}`}
                   >
                     {/*Edit Icon + Text*/}
                     <span className="material-symbols-outlined">edit</span>
                     Edit
-                  </button>
+                  </Button>
 
-                  <button
+                  <Button className="delete-expense-btn"
                     type="button"
-                    className="delete-expense-btn"
                     //onDelete && confirms method exists before invoking (error-checking)
                     onClick={() => onDelete && onDelete(id)}
                     aria-label={`Delete expense ${category || ''}`}
@@ -156,13 +111,13 @@ export default function ExpenseDetails({ expenses, onUpdate, onDelete }) {
                     {/*Delete Icon + Text*/}
                     <span className="material-symbols-outlined">delete</span>
                     Delete
-                  </button>
+                  </Button>
                 </CardActions>
               </Card>
             );
           })}
-        </div>
+        </Box>
       )}
-    </div>
+    </Box>
   );
 }

@@ -2,6 +2,7 @@
 // useEffect -> Used once or occasional clean-up when asked. 
 // useState returns an array with TWO things: variable and setter w/ initial state.
 import { useState, useEffect } from 'react';
+import{Box, Typography} from '@mui/material';
 
 // Imported Components
 import ExpenseClient from './ExpenseClient';
@@ -96,25 +97,27 @@ export default function Expense() {
 
   // Parent Expense Display
   return (
-    <div className="expenses-page">
+    <Box className="expenses-page">
       {/* "Page Title: Expense" Header */}
-      <h1>Expenses</h1>
-      <section className="split-view">
-        <div className="pane left">
+      <Typography className="expense-page-header">
+        Expenses
+        </Typography>
+      <Box className="split-view">
+        <Box className="pane-left">
           {/* "Expense Details" Child */}
           <ExpenseDetails
             expenses={expenses}
             onUpdate={handleUpdateExpense}
             onDelete={handleDeleteExpense} />
-        </div>
-        <div className="pane right">
+        </Box>
+        <Box className="pane-right">
           {/* "Add/Update Expense Form" Child */}
           <ExpenseForm
             initialData={selectedExpense}
             onSubmit={handleSubmitExpense}
             onCancelEdit={handleCancelEdit} />
-        </div>
-      </section>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 }

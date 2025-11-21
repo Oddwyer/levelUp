@@ -1,8 +1,6 @@
 // Import React Hooks & Material UI Components
-import { TextField } from '@mui/material';
 import { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import {Box, Typography, Button, TextField} from '@mui/material';
 
 // Child - ExpenseForm Component Function
 // Parent Class Props:
@@ -146,10 +144,9 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
 
   // Expense Form Display + Save Expense Button
   return (
-    <Box className="form-group"
-      sx={{ display: "flex", flexDirection: "column", gap: 3.5}}>
+    <Box className="expense-form-box">
       {/* Change heading based on mode */}
-      <Typography sx={{ color: '#8f1321', fontWeight: 'bold', fontSize: '25px', marginTop: 1 }}>
+      <Typography className='form-header'>
         {isEditMode ? 'Edit Expense' : 'Add Expense'}
       </Typography>
 
@@ -160,10 +157,10 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
       <form className="expense-form" onSubmit={handleSubmit}>
 
         {/* Expense Amount Field */}
-        <Typography sx={{ color: 'brand-black', fontWeight: 'bold' }}>
+        <Typography className='field-labels'>
           Amount:
         </Typography>
-        <TextField className='input' sx={{ display: "flex", flexDirection: "column", gap: 3.5, marginTop: 1, marginBottom: 2 }}
+        <TextField className='input' 
           label=""
           type="text"
           id="amount"
@@ -176,10 +173,10 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
         {errors.amount && <p className="error">{errors.amount}</p>}
 
         {/* Expense Category Field */}
-        <Typography sx={{ color: 'brand-black', fontWeight: 'bold' }}>
+        <Typography className='field-labels'>
           Category:
         </Typography>
-        <TextField className='input' sx={{ display: "flex", flexDirection: "column", gap: 3.5, marginTop: 1, marginBottom: 2 }}
+        <TextField className='input'
           label=""
           type="text"
           id="category"
@@ -194,10 +191,10 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
         {errors.category && <p className="error">{errors.category}</p>}
 
         {/* Expense Description Field */}
-        <Typography sx={{ color: 'brand-black', fontWeight: 'bold' }}>
+        <Typography className='field-labels'>
           Description:
         </Typography>
-        <TextField className='input' sx={{ display: "flex", flexDirection: "column", marginTop: 1, marginBottom: 2 }}
+        <TextField className='input' 
           label=""
           id="description"
           name="description"
@@ -206,10 +203,10 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
         />
 
         {/* Expense Date Field */}
-        <Typography sx={{ color: 'brand-black', fontWeight: 'bold' }}>
+        <Typography className='field-labels'>
           Transaction Date:
         </Typography>
-        <TextField className='input' sx={{ display: "flex", flexDirection: "column", gap: 3.5, marginTop: 1, marginBottom: 2 }}
+        <TextField className='input'
           label=""
           type="date"
           id="expenseDate"
@@ -222,23 +219,22 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
         {/* Inline Field Validation Message */}
         {errors.expenseDate && <p className="error">{errors.expenseDate}</p>}
 
-        <div className="form-actions">
-          <button type="submit" disabled={submitting}>
+        <Box className="form-actions">
+          <Button className="submit-btn" type="submit" disabled={submitting}>
             {isEditMode ? 'Update Expense' : 'Save Expense'}
-          </button>
+          </Button>
 
           {/* Show Cancel Only when Editing */}
           {isEditMode && onCancelEdit && (
-            <button
-              type="button"
-              className="secondary-btn"
+            <Button className="cancel-btn"
+            type="button"
               onClick={onCancelEdit}
               disabled={submitting}
             >
               Cancel
-            </button>
+            </Button>
           )}
-        </div>
+        </Box>
       </form >
     </Box >
   );
