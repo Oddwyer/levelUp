@@ -1,44 +1,33 @@
 import mockExpenses from "./seedData";
+import axios from "axios";
 
+
+// Red Endpoints Expense Client (Using Axios)
 export default class ExpenseClient {
   static baseUrl = 'http://localhost:8080/api';
 
 
-  // Rest Endpoint - GET e
+  // Rest Endpoint - GET  
   static async getExpenses(userId) {
     const url = `${ExpenseClient.baseUrl}/expenses${userId ? `?userId=${encodeURIComponent(userId)}` : ''}`;
     try {
-      const response = await fetch(url);
-      // If status error, throw exception
-      if (!response.ok) {
-        throw new Error(`Failed to fetch expenses from ${url}`);
-      }
+      const response = await axios.get(url);
       // Return Extract JSON Details or Display Error
-      return await response.json();
+      return response.data;
     } catch (err) {
       console.error("Error fetching expenses:", err);
       return [];
     }
   }
 
-  // Rest Endpoint - POST expense
+  // Rest Endpoint - POST expense (using axios method)
   static async addExpense(expense) {
     const url = `${ExpenseClient.baseUrl}/expenses`;
     try {
       // Save HTTP fetched data
-      const response = await fetch(url, {
-        // Post requirements
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(expense),
-      });
-      // If status error, throw exception
-      if (!response.ok) {
-        const text = await response.text().catch(() => '');
-        throw new Error(text || "Failed to add expense");
-      }
+      const response = await axios.post(url,expense);
       // Return extracted JSON from created expense object or display error
-      return await response.json();
+      return response.data
     } catch (err) {
       console.error("Error adding expense:", err);
       throw err;
@@ -51,19 +40,9 @@ export default class ExpenseClient {
     const url = `${ExpenseClient.baseUrl}/expenses/${encodeURIComponent(id)}`;
     try {
       // Save HTTP fetched data
-      const response = await fetch(url, {
-        // Put requirements
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(expense),
-      });
-      // If status error, throw exception
-      if (!response.ok) {
-        const text = await response.text().catch(() => '');
-        throw new Error(text || "Failed to update expense");
-      }
+      const response = await axios.put(url,expense);
       // Return extracted JSON from expense object or display error
-      return await response.json();
+      return response.data;
     } catch (err) {
       console.error("Error updating expense:", err);
       throw err;
@@ -76,21 +55,10 @@ export default class ExpenseClient {
     const url = `${ExpenseClient.baseUrl}/expenses/${encodeURIComponent(id)}`;
     try {
       // Save HTTP fetched data
-      const response = await fetch(url, {
-        // Delete requirements
-        method: 'DELETE'
-      });
-      // If status error, throw exception
-      if (!response.ok) {
-        const text = await response.text().catch(() => '');
-        throw new Error(text || "Failed to delete expense");
-      }
-      // If no JSON content on delete (common)
-      if (response.status === 204) return true;
-      
-      // Else, if JSON content on delete (uncommon)
+      const response = await axios.delete(url);
+      // If JSON content on delete (uncommon)
       try {
-        return await response.json();
+        return await response.data;
       } catch {
         return true;
 

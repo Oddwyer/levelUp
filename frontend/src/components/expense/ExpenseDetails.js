@@ -7,11 +7,11 @@ import Typography from '@mui/material/Typography';
 
 // Parent Class Props:
 // - expenses: array of expense objects to display
-// - onEdit:   function(expense) -> called when user clicks "Edit" on a card
+// - onUpdate: function(expense) -> called when user clicks "Edit" on a card
 // - onDelete: function(id)      -> called when user clicks "Delete" on a card
 
 // Child - ExpenseDetails Component Function
-export default function ExpenseDetails({ expenses, onEdit, onDelete }) {
+export default function ExpenseDetails({ expenses, onUpdate, onDelete }) {
   return (
     <div className="expenses-display">
       {/* Section Title */}
@@ -35,20 +35,20 @@ export default function ExpenseDetails({ expenses, onEdit, onDelete }) {
               amount,
               category,
               description,
-              expense_date,
+              expenseDate,
               created_at,
             } = expense;
 
-            // Safely Format Transaction Date
+            // Safely Format Transaction Date -> 'let' is flexible generic type
             let formattedDate = '';
-            if (expense_date) {
-              const d = new Date(expense_date);
+            if (expenseDate) {
+              const d = new Date(expenseDate);
               formattedDate = isNaN(d.getTime())
-                ? String(expense_date) // If Invalid Date, Show Raw Value
+                ? String(expenseDate) // If Invalid Date, Show Raw Value
                 : d.toLocaleDateString();
             }
 
-            // Safely Format Created_at Timestamp
+            // Safely Format Created_at Timestamp 
             let createdAtText = '';
             if (created_at) {
               const c = new Date(created_at);
@@ -62,7 +62,7 @@ export default function ExpenseDetails({ expenses, onEdit, onDelete }) {
               <Card
                 className="expense-card"
                 sx={{ maxWidth: 600 }}
-                key={id ?? `${category}-${amount}-${expense_date}`}
+                key={id ?? `${category}-${amount}-${expenseDate}`}
               >
                 <CardContent>
                   {/* Category Title*/}
@@ -79,8 +79,17 @@ export default function ExpenseDetails({ expenses, onEdit, onDelete }) {
                   </Typography>
 
                   {/* Amount */}
-                  <Box sx={{ display: 'flex', alignItems: 'center', paddingTop: 1 }}>
-                    <Typography sx={{ color: 'brand-black', fontWeight: 'bold' }}>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      paddingTop: 1
+                    }}>
+                    <Typography
+                      sx={{
+                        color: 'brand-black',
+                        fontWeight: 'bold'
+                      }}>
                       Amount:&nbsp;
                     </Typography>
                     ${amount != null && amount !== ''
@@ -89,62 +98,65 @@ export default function ExpenseDetails({ expenses, onEdit, onDelete }) {
                   </Box>
 
                   {/* Description */}
-                  <Box sx={{ display: 'flex', alignItems: 'center', paddingTop: 1 }}>
-                    <Typography sx={{ color: 'brand-black', fontWeight: 'bold' }}>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      paddingTop: 1
+                    }}>
+                    <Typography
+                      sx={{
+                        color: 'brand-black',
+                        fontWeight: 'bold'
+                      }}>
                       Description:&nbsp;
                     </Typography>
                     {description ? description : ''}
                   </Box>
 
                   {/* Transaction Date */}
-                  <Box sx={{ display: 'flex', alignItems: 'center', paddingTop: 1 }}>
-                    <Typography sx={{ color: 'brand-black', fontWeight: 'bold' }}>
-                      Date:&nbsp;
-                    </Typography>
-                    {formattedDate || 'No Date'}
-                  </Box>
-
-                  {/* Created-at Info */}
                   <Box
                     sx={{
                       display: 'flex',
                       alignItems: 'center',
-                      paddingTop: 1,
-                      paddingBottom: 1,
-                    }}
-                  >
-                    <Typography sx={{ color: 'brand-black', fontSize: '12px' }}>
-                      Added on:&nbsp;
+                      paddingTop: 1
+                    }}>
+                    <Typography
+                      sx={{
+                        color: 'brand-black',
+                        fontWeight: 'bold'
+                      }}>
+                      Transaction Date:&nbsp;
                     </Typography>
-                    <Typography sx={{ color: 'brand-black', fontSize: '12px' }}>
-                      {createdAtText}
-                    </Typography>
+                    {formattedDate || 'No Date'}
                   </Box>
                 </CardContent>
 
                 {/* Action Buttons: Update + Delete */}
-                <CardActions>
-                  <div className="card-actions">
-                    <button
-                      type="button"
-                      className="edit-expense-btn"
-                      onClick={() => onEdit && onEdit(expense)}
-                      aria-label={`Edit expense ${category || ''}`}
-                    >
-                      <span className="material-symbols-outlined">edit</span>
-                      Edit
-                    </button>
+                <CardActions className="card-actions">
+                  <button
+                    type="button"
+                    className="edit-expense-btn"
+                    //onUpdate && confirms method exists before invoking (error-checking)
+                    onClick={() => onUpdate && onUpdate(expense)}
+                    aria-label={`Edit expense ${category || ''}`}
+                  >
+                    {/*Edit Icon + Text*/}
+                    <span className="material-symbols-outlined">edit</span>
+                    Edit
+                  </button>
 
-                    <button
-                      type="button"
-                      className="delete-expense-btn"
-                      onClick={() => onDelete && onDelete(id)}
-                      aria-label={`Delete expense ${category || ''}`}
-                    >
-                      <span className="material-symbols-outlined">delete</span>
-                      Delete
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    className="delete-expense-btn"
+                    //onDelete && confirms method exists before invoking (error-checking)
+                    onClick={() => onDelete && onDelete(id)}
+                    aria-label={`Delete expense ${category || ''}`}
+                  >
+                    {/*Delete Icon + Text*/}
+                    <span className="material-symbols-outlined">delete</span>
+                    Delete
+                  </button>
                 </CardActions>
               </Card>
             );

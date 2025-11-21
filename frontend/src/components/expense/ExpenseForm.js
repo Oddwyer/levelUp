@@ -17,7 +17,7 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
     amount: '',
     category: '',
     description: '',
-    expense_date: '',
+    expenseDate: '',
   });
 
   // Error Catching / Boolean Variables
@@ -40,7 +40,7 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
         amount: initialData.amount != null ? String(initialData.amount) : '',
         category: initialData.category || '',
         description: initialData.description || '',
-        expense_date: initialData.expense_date ? String(initialData.expense_date).slice(0, 10) : '',
+        expenseDate: initialData.expenseDate ? String(initialData.expenseDate).slice(0, 10) : '',
       });
       setErrors({});
       setServerError('');
@@ -52,7 +52,7 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
         amount: '',
         category: '',
         description: '',
-        expense_date: '',
+        expenseDate: '',
       });
       setErrors({});
       setServerError('');
@@ -70,8 +70,8 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
     if (!f.category.trim()) {
       e.category = 'Category is required';
     }
-    if (!f.expense_date) {
-      e.expense_date = 'Date is required';
+    if (!f.expenseDate) {
+      e.expenseDate = 'Date is required';
     }
     return e;
   }
@@ -110,7 +110,7 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
         amount: Number(form.amount),
         category: form.category.trim(),
         description: form.description.trim(),
-        expense_date: form.expense_date,
+        expenseDate: form.expenseDate,
       };
 
       //3. Send to Parent(Expense.js)
@@ -130,7 +130,7 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
           amount: '',
           category: '',
           description: '',
-          expense_date: '',
+          expenseDate: '',
         });
         setErrors({});
       }
@@ -163,7 +163,7 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
         </Typography>
         <TextField className='input' sx={{ display: "flex", flexDirection: "column", gap: 3.5, marginTop: 1, marginBottom: 2 }}
           label=""
-          type="number"
+          type="text"
           id="amount"
           name="amount"
           value={form.amount}
@@ -210,15 +210,15 @@ export default function ExpenseForm({ initialData, onSubmit, onCancelEdit }) {
         <TextField className='input' sx={{ display: "flex", flexDirection: "column", gap: 3.5, marginTop: 1, marginBottom: 2 }}
           label=""
           type="date"
-          id="expense_date"
-          name="expense_date"
-          value={form.expense_date}
+          id="expenseDate"
+          name="expenseDate"
+          value={form.expenseDate}
           onChange={handleChange}
           required
         />
 
         {/* Inline Field Validation Message */}
-        {errors.expense_date && <p className="error">{errors.expense_date}</p>}
+        {errors.expenseDate && <p className="error">{errors.expenseDate}</p>}
 
         <div className="form-actions">
           <button type="submit" disabled={submitting}>

@@ -1,5 +1,7 @@
-// Import React Hook
-import React, { useState, useEffect } from 'react';
+// Import React Hooks
+// useEffect -> Used once or occasional clean-up when asked. 
+// useState returns an array with TWO things: variable and setter w/ initial state.
+import { useState, useEffect } from 'react';
 
 // Imported Components
 import ExpenseClient from './ExpenseClient';
@@ -16,12 +18,11 @@ import './Expense.css';
 // - Owns which expense is currently selected for editing
 // - Passes data + callbacks to children
 export default function Expense() {
-  // State for List Display
-  // Note: useState returns an array with TWO things: variable and setter w/ initial state.
+
+  // State for expense list display
   const [expenses, setExpenses] = useState([]);
-  // Boolean Values for Loading States
-  const [loading, setLoading] = useState(true);
-  // The Expense Currently Being Edited (null means "add mode")
+
+  // State for expense currently being edited (null means "add mode")
   const [selectedExpense, setSelectedExpense] = useState(null);
 
   // Auto-Load Expenses on Mount
@@ -34,8 +35,6 @@ export default function Expense() {
       } catch (err) {
         console.error("Failed to load expenses:", err);
         setExpenses([]); // fail-safe
-      } finally {
-        setLoading(false);
       }
     }
     )();
@@ -46,63 +45,52 @@ export default function Expense() {
   // - If `expenseData.id` exists  -> UPDATE (PUT)
   // - If `expenseData.id` is empty -> CREATE (POST)
   const handleSubmitExpense = async (expenseData) => {
-    setLoading(true);
-
     try {
-      //If ID Provided, Update Expense
+
+      //If expense ID provided -> update expense
       if (expenseData.id) {
-
         const updated = await ExpenseClient.updateExpense(expenseData.id, expenseData);
-
-        // Refresh List to Display Updated Expenses
+        // Refresh list to display updated expenses
         setExpenses((prev) =>
           prev.map((e) => (e.id === updated.id ? updated : e))
         );
-
         // Exit Edit Mode
         setSelectedExpense(null);
-
         return updated;
-
-        // If ID NOT Provided, Add Expense
-      } else {
-
-        const created = await ExpenseClient.addExpense(expenseData);
-
-        // Refresh List to Display Added Expense
+      }
+      // If expense ID NOT provided -> add expense
+      else {
+        const newExpense = {...expenseData, userId: 1};
+        const created = await ExpenseClient.addExpense(newExpense);
+        // Refresh list to display added expense(s)
         setExpenses((prev) => [created, ...prev]);
-
         return created;
       }
 
     } catch (err) {
       console.error("Save failed:", err);
-    } finally {
-      setLoading(false);
     }
   };
 
-  // Cancel Edit Mode (return to add mode)
+  // Function - Cancel Edit Mode (clear form)
   const handleCancelEdit = () => {
     setSelectedExpense(null);
   };
 
-  // Delete Expense
+  // Function - Delete Expense
   const handleDeleteExpense = async (id) => {
-    setLoading(true);
     try {
+      // Invoke ExpenseClient deleteExpense method
       await ExpenseClient.deleteExpense(id);
 
-      // Refresh List w/out Expense
-      setExpenses((prev) => prev.filter((e) => e.id !== id));
+      // Refresh list to display w/out expense
+      setExpenses((prev )=> prev.filter((e) => e.id !== id));
     } catch (err) {
       console.error("Failed to delete expense:", err);
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
-  // When Edit Requested
-  const handleEditExpense = (expense) => {
+  // Function - Edit Expense (load selected expense in form)
+  const handleUpdateExpense = (expense) => {
     setSelectedExpense(expense);
   };
 
@@ -113,18 +101,18 @@ export default function Expense() {
       <h1>Expenses</h1>
       <section className="split-view">
         <div className="pane left">
-          {/* "Expense Details" Display */}
-          <ExpenseDetails 
-          expenses={expenses} 
-          onEdit={handleEditExpense} 
-          onDelete={handleDeleteExpense} />
+          {/* "Expense Details" Child */}
+          <ExpenseDetails
+            expenses={expenses}
+            onUpdate={handleUpdateExpense}
+            onDelete={handleDeleteExpense} />
         </div>
         <div className="pane right">
-          {/* "Add/Update Expense Form" Display */}
-          <ExpenseForm 
-          initialData={selectedExpense} 
-          onSubmit={handleSubmitExpense} 
-          onCancelEdit={handleCancelEdit} />
+          {/* "Add/Update Expense Form" Child */}
+          <ExpenseForm
+            initialData={selectedExpense}
+            onSubmit={handleSubmitExpense}
+            onCancelEdit={handleCancelEdit} />
         </div>
       </section>
     </div>
