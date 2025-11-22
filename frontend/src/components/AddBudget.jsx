@@ -10,27 +10,55 @@ export function AddBudget({ onAdd }) {
         setForm({ ...form, [name]: value });
     };
 
-    const handleAdd = (e) => {
+    const handleAdd = async (e) => {
         e.preventDefault();
         const trimmedCategory = form.category.trim();
         const trimmedDescription = form.description.trim();
         const amount = parseFloat(form.amount);
         
         if (!form.amount || !trimmedCategory || !trimmedDescription) {
-            setError("⚠️ Please fill in all fields.");
+            setError("Please fill in all fields.");
             return;
         }
         
         if (Number.isNaN(amount) || amount <= 0) {
-            setError("⚠️ Please enter a valid positive amount.");
+            setError("Please enter a valid positive amount.");
             return;
         }
         
         setError("");
-        // Call parent's onAdd function to update items state
-        onAdd({ amount, category: trimmedCategory, description: trimmedDescription });
-        setForm({ amount: "", category: "", description: "" });
+
+        const userId = 1; // hardcoded for now until login/auth
+
+    const body = {
+        category: trimmedCategory,
+        amount: amount,
+        description: trimmedDescription,
+        userId
     };
+
+    try {
+        await fetch(`http://localhost:8080/api/budgets`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        });
+
+        // Update local UI
+        onAdd({
+            amount,
+            category: trimmedCategory,
+            description: trimmedDescription
+        });
+
+        setForm({ amount: "", category: "", description: "" });
+
+    } catch (err) {
+        console.error(err);
+        setError("Could not add budget. Check backend.");
+    }
+};
+    
 
     return (
         <div className="add-budget-container">

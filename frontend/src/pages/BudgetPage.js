@@ -1,4 +1,4 @@
-// pages/Budget.jsx
+/* pages/Budget.jsx
 import React, { useState } from "react";
 import Header from "../components/Header.jsx";
 import { AddBudget } from "../components/AddBudget.jsx";
@@ -28,4 +28,4 @@ export default function BudgetPage() {
       <BudgetTable items={items} onEdit={handleEdit} onDelete={handleDelete} />
     </div>
   );
-}
+} */

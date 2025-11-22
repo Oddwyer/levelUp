@@ -81,7 +81,7 @@ export function BudgetTable({ items, onEdit, onDelete }) {
                                             ) : (
                                                 <>
                                                     <button className="action-button edit-button" onClick={() => startEdit(item)}>Edit</button>
-                                                    <button className="action-button delete-button" onClick={() => onDelete && onDelete(item.id)}>Delete</button>
+                                                    <button className="action-button delete-button" onClick={() => { console.log("Deleting item id:", item.id); onDelete && onDelete(item.id); }}>Delete</button>
                                                 </>
                                             )}
                                         </td>

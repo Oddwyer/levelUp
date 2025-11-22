@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import axios from "axios";
-import BudgetPage from './pages/BudgetPage.js';
+import BudgetPage from './pages/BudgetPage.jsx';
 
 import { useEffect, useState } from 'react';
 
@@ -16,7 +16,7 @@ function App() {
 
   const loadUsers = async()=> {
     try {
-      const result = await axios.get("http://localhost:8080/users");
+      const result = await axios.get("http://localhost:8080/api/users");
       setUsers(result.data || []);
       console.log('loaded users', result.data);
     } catch (err) {
