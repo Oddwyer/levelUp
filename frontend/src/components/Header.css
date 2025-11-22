@@ -23,7 +23,7 @@
 }
 
 .header-bg {
-  background-image: url("mountain.jpeg");
+/*  background-image: url("mountain.jpeg"); */
   background-size: cover;
   background-position: center;
   height: 100%;
@@ -75,7 +75,7 @@
 }
 
 .logo {
-  background-image: url(levelUPLogo.png);
+/*  background-image: url(levelUPLogo.png); */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
