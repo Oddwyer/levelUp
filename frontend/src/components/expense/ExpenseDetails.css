@@ -1,0 +1,83 @@
+/* Overall container for the display section */
+.expenses-display {
+  max-width: 800px; 
+  padding: 0 1.5rem; 
+  overflow-y: scroll;
+  max-height: calc(100% - 125px); /* Ensure it fills the height of its parent */
+}
+
+/* Add Expense header */
+.expenses-display h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: var(--brand-red-dark);
+  font-family: var(--font-base);
+}
+
+/* Expense Edit Button */
+.update-expense-btn {
+  width: 115px;
+  margin-top: 1rem;
+  padding: 0.15rem 1rem;
+  margin-right: 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--brand-gray);
+  color: white;
+  font-family: var(--font-base);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+/* Expense Delete Button */
+.delete-expense-btn {
+  width: 115px;
+  margin-top: 1rem;
+  padding: 0.15rem 1rem;
+  margin-right: 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--brand-gray);
+  color: white;
+  font-family: var(--font-base);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+/* Expense List of Cards */
+.expense-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Each Expense Card */
+.expense-card {
+  background: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 12px; /* soft rounded edges */
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.386); /* subtle shadow for depth */
+  font-family: var(--font-base);
+}
+
+/* Category title style */
+h3.expense-category {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #000000;
+  font-family: var(--font-base);
+  text-decoration: underline;
+}
+
+
