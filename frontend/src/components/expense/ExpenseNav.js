@@ -1,6 +1,6 @@
 // Import Logo
 import logo from '../../assets/levelUp-logo.png';
-
+import { Link } from "react-router-dom";
 // Import css File
 import './ExpenseNav.css';
 
@@ -42,9 +42,9 @@ export default function ExpenseNav() {
         {/*===================Center Navigation===========*/}
         {/*'nav' is more specific than 'div' here though both can be used."*/}
         <nav className="expense-links" aria-label="Primary Navigation">
-          <a href="Expense">Expense</a>
-          <a href="Budget">Budget</a>
-          <a href="Dasboard">Dashboard</a>
+          <Link to="/expense">Expense</Link>
+          <Link to="/budget">Budget</Link>
+          <Link to="/dashboard">Dashboard</Link>
         </nav>
 
         {/*===================Right Navigation===========*/}

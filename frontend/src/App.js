@@ -6,9 +6,11 @@ import './components/expense/ExpenseNav.css';
 import './components/expense/ExpenseDetails.css';
 import './components/expense/Expense.css';
 
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ExpensePage from "./pages/ExpensePage";
+// import Dashboard from "./pages/Dashboard";
+import ExpenseNav from "./components/expense/ExpenseNav";
 //Import components
-import axios from 'axios';
-import ExpenseNav from './components/expense/ExpenseNav';
 import { useEffect, useState } from 'react';
 import Expense from './components/expense/Expense';
 
@@ -30,15 +32,18 @@ const loadUsers = async () => {
 };
 
 return (
-  <div className="App">
-    <header className="site-header">
+  <Router>
       <ExpenseNav />
-    </header>
-    <main className="app-main">
-      <Expense />
-      <BudgetPage />
-    </main>
-  </div>
+      <Routes>
+        <Route path="/expense" element={<ExpensePage />} />
+        <Route path="/budget" element={<BudgetPage />} />
+      {/*  <Route path="/dashboard" element={<Dashboard />} />
+
+        {/* fallback */}
+
+        <Route path="*" element={<ExpensePage />} />
+      </Routes>
+    </Router>
 );
 }
 

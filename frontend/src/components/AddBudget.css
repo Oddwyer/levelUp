@@ -1,9 +1,18 @@
+#root {
+background-image: url('../assets/expenses.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
 .add-budget-container {
     background-color: #333333;
     padding: 24px;
     border-radius: 8px;
     max-width: 500px;
     margin: 20px auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    
 }
 
 .add-budget-form {

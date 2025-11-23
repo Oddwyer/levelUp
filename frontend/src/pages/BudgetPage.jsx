@@ -56,7 +56,7 @@ export default function BudgetPage() {
 
     return (
         <div>
-            <Header/>
+            
             <AddBudget onAdd={handleAddBudget} />
             <BudgetTable items={budgets} onEdit={handleEditBudget} onDelete={handleDeleteBudget} />
         </div>
