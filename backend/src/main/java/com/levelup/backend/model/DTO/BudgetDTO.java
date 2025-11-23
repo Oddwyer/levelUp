@@ -1,33 +1,14 @@
-package com.levelup.backend.model;
+package com.levelup.backend.model.DTO;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
-
-@Entity
-public class Budget {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class BudgetDTO {
 
     private double amount;
     private String category;
     private String description;
+    private String budgetDate;   // like expenseDate
+    private Long userId;
 
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    // Getters & Setters
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
+    // Getters and Setters
     public double getAmount() {
         return amount;
     }
@@ -53,11 +34,11 @@ public class Budget {
     }
 
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
