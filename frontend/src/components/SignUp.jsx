@@ -1,74 +1,118 @@
 import { useState } from "react";
 import PageWrapper from "./PageWrapper";
-import sharedStyles from "./SharedStyles";
 import levelUp from '../assets/levelUp-logo.png';
 
 const SignUp = ({ onBackToLogin }) => {
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setError('');
+    
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+
+    if (data.password !== data['confirm-password']) {
+        setError("Passwords do not match");
+        return;
+    }
+
+    setIsLoading(true);
+
+      // will need to replace with actual backend URL if it is different
+    try {
+        const response = await fetch('http://localhost:5000/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                firstName: data['first-name'],
+                lastName: data['last-name'],
+                email: data.email,
+                password: data.password
+            }),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.message || 'Registration failed');
+        }
+
+        setSubmitted(true);
+    } catch (err) {
+        setError(err.message || "An error occurred during sign up.");
+    } finally {
+        setIsLoading(false);
+    }
   };
 
   return (
-    <>
-      <style>{sharedStyles}</style>
-      <PageWrapper>
-        <div className="max-w-md w-full space-y-8 bg-[var(--brand-dark)] bg-opacity-80 backdrop-blur-lg p-10 rounded-2xl shadow-2xl border border-gray-700/50">
+    <PageWrapper>
+        <div className="auth-card">
           {submitted ? (
              <div className="text-center">
-                <div className="flex justify-center">
-                    <img src={levelUp} alt="LevelUp Logo" className="h-20 w-auto" />
+                <div className="logo-container">
+                    <img src={levelUp} alt="LevelUp Logo" className="logo" />
                 </div>
-                <h2 className="mt-6 text-center text-3xl font-extrabold text-white">Thank you for signing up!</h2>
-                <p className="mt-4 text-center text-sm text-gray-300">
-                    Please check your email to complete the registration.
+                <h2 className="auth-title">Thank you for signing up!</h2>
+                <p className="auth-subtitle mt-4">
+                    Your account has been created successfully.
                 </p>
                 <div className="mt-6">
-                    <a href="#" onClick={(e) => { e.preventDefault(); onBackToLogin(); }} className="font-medium text-sm text-[var(--brand-pink)] hover:text-red-300 transition-colors">
+                    <button onClick={(e) => { e.preventDefault(); onBackToLogin(); }} className="link-btn">
                         Back to Sign In
-                    </a>
+                    </button>
                 </div>
             </div>
           ) : (
             <>
               <div>
-                <div className="flex justify-center">
-                  <img src={levelUp} alt="LevelUp Logo" className="h-20 w-auto" />
+                <div className="logo-container">
+                  <img src={levelUp} alt="LevelUp Logo" className="logo" />
                 </div>
-                <h2 className="mt-6 text-center text-3xl font-extrabold text-white">Create your account</h2>
-                <p className="mt-2 text-center text-sm text-gray-300">Join LevelUp to start your journey</p>
+                <h2 className="auth-title">Create your account</h2>
+                <p className="auth-subtitle">Join LevelUp to start your journey</p>
               </div>
-              <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-                <div className="rounded-md shadow-sm -space-y-px">
-                  <div className="flex space-x-2">
-                    <input name="first-name" type="text" required className="appearance-none rounded-t-md relative block w-1/2 px-3 py-3 border border-gray-600 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--brand-pink)] focus:border-[var(--brand-red)] focus:z-10 sm:text-sm transition-all" placeholder="First Name" />
-                    <input name="last-name" type="text" required className="appearance-none rounded-t-md relative block w-1/2 px-3 py-3 border border-gray-600 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--brand-pink)] focus:border-[var(--brand-red)] focus:z-10 sm:text-sm transition-all" placeholder="Last Name" />
+              
+              <form className="form-stack" onSubmit={handleSubmit}>
+                <div className="input-group">
+                  <div className="name-row">
+                    <input name="first-name" type="text" required className="form-input" placeholder="First Name" />
+                    <input name="last-name" type="text" required className="form-input" placeholder="Last Name" />
                   </div>
-                  <input id="email-address" name="email" type="email" autoComplete="email" required className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-600 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--brand-pink)] focus:border-[var(--brand-red)] focus:z-10 sm:text-sm transition-all" placeholder="Email address" />
-                  <input id="password" name="password" type="password" required className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-600 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--brand-pink)] focus:border-[var(--brand-red)] focus:z-10 sm:text-sm transition-all" placeholder="Password" />
-                  <input id="confirm-password" name="confirm-password" type="password" required className="appearance-none rounded-b-md relative block w-full px-3 py-3 border border-gray-600 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--brand-pink)] focus:border-[var(--brand-red)] focus:z-10 sm:text-sm transition-all" placeholder="Confirm Password" />
+                  <input id="email-address" name="email" type="email" autoComplete="email" required className="form-input middle" placeholder="Email address" />
+                  <input id="password" name="password" type="password" required className="form-input middle" placeholder="Password" />
+                  <input id="confirm-password" name="confirm-password" type="password" required className="form-input bottom-single" placeholder="Confirm Password" />
                 </div>
+
+                {error && (
+                    <div className="error-msg">
+                        {error}
+                    </div>
+                )}
+
                 <div>
-                  <button type="submit" className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[var(--brand-red)] hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-[var(--brand-pink)] transition-transform transform hover:scale-105 duration-300">
-                    Create Account
+                  <button type="submit" disabled={isLoading} className="btn-primary">
+                    {isLoading ? 'Creating Account...' : 'Create Account'}
                   </button>
                 </div>
               </form>
-              <div className="text-center">
-                <p className="text-sm text-gray-300">
+              <div className="text-center mt-6">
+                <p className="auth-subtitle">
                   Already have an account?{' '}
-                  <a href="#" onClick={(e) => { e.preventDefault(); onBackToLogin(); }} className="font-medium text-[var(--brand-pink)] hover:text-red-300 transition-colors">
+                  <button onClick={(e) => { e.preventDefault(); onBackToLogin(); }} className="link-btn">
                     Sign in
-                  </a>
+                  </button>
                 </p>
               </div>
             </>
           )}
         </div>
-      </PageWrapper>
-    </>
+    </PageWrapper>
   );
 };
 
