@@ -29,8 +29,7 @@ export default function Dashboard() {
             <div style={styles.heroCard}>
               <h3 style={styles.heroCardTitle}>This is your dashboard</h3>
               <p style={styles.heroCardBody}>
-                Once the other tasks are wired in, you&apos;ll see real income,
-                budget, and expense data here.
+                Placeholder for income, budget, and expense data.
               </p>
             </div>
           </div>
