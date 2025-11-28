@@ -1,75 +1,50 @@
+//Import css
+import './App.css';
+import axios from "axios";
+import BudgetPage from './pages/BudgetPage.jsx';
+import './components/expense/ExpenseNav.css';
+import './components/expense/ExpenseDetails.css';
+import './components/expense/Expense.css';
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
-
-import Dashboard from "./pages/Dashboard";
-import Income from "./pages/Income";
-import Expenses from "./pages/Expenses";
-import ProtectedRoute from "./components/ProtectedRoute";
-
-
-function Login() {
-  return (
-    <div style={{ padding: "40px" }}>
-      <h2>Login Page </h2>
-      <p>Auth not connected yet</p>
-    </div>
-  );
-}
-
-function Register() {
-  return (
-    <div style={{ padding: "40px" }}>
-      <h2>Register Page </h2>
-      <p>Auth not connected yet</p>
-    </div>
-  );
-}
+import ExpensePage from "./pages/ExpensePage";
+// import Dashboard from "./pages/Dashboard";
+import ExpenseNav from "./components/expense/ExpenseNav";
+//Import components
+import { useEffect, useState } from 'react';
+import Expense from './components/expense/Expense';
 
 function App() {
-  return (
-    <AuthProvider>
-      <Router>
-        <Routes>
+  const [users, setUsers] = useState([]);
 
-          {/* Public routes */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+  useEffect(() => {
+    loadUsers();
+  }, []);
 
-          {/* Protected routes */}
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
+const loadUsers = async () => {
+  try {
+    const result = await axios.get("http://localhost:8080/api/users");
+    setUsers(result.data || []);
+    console.log("loaded users", result.data);
+  } catch (err) {
+    console.error("failed loading users", err);
+  }
+};
 
-          <Route
-            path="/income"
-            element={
-              <ProtectedRoute>
-                <Income />
-              </ProtectedRoute>
-            }
-          />
+return (
+  <Router>
+      <ExpenseNav />
+      <Routes>
+        <Route path="/expense" element={<ExpensePage />} />
+        <Route path="/budget" element={<BudgetPage />} />
+      {/*  <Route path="/dashboard" element={<Dashboard />} />
 
-          <Route
-            path="/expenses"
-            element={
-              <ProtectedRoute>
-                <Expenses />
-              </ProtectedRoute>
-            }
-          />
+        {/* fallback */}
 
-          {/* Default landing page */}
-          <Route path="*" element={<Login />} />
-
-        </Routes>
-      </Router>
-    </AuthProvider>
-  );
+        <Route path="*" element={<ExpensePage />} />
+      </Routes>
+    </Router>
+);
 }
 
 export default App;

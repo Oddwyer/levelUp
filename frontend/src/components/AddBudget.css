@@ -1,0 +1,76 @@
+#root {
+background-image: url('../assets/expenses.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.add-budget-container {
+    background-color: #333333;
+    padding: 24px;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: 20px auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    
+}
+
+.add-budget-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #555555;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #444444;
+    color: white;
+    box-sizing: border-box;
+}
+
+.form-input::placeholder {
+    color: #999999;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #a41727;
+    box-shadow: 0 0 4px rgba(164, 23, 39, 0.3);
+}
+
+.error-message {
+    color: #ff6b6b;
+    font-size: 0.875rem;
+    padding: 8px 12px;
+    background-color: rgba(255, 107, 107, 0.1);
+    border-radius: 4px;
+    border-left: 3px solid #ff6b6b;
+}
+
+.submit-button {
+    background-color: #a41727;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.submit-button:hover {
+    background-color: #8b0e1f;
+}
+
+.submit-button:active {
+    background-color: #6d0a19;
+}
+
+h2 {
+    color: white;
+}
