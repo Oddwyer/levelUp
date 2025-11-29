@@ -5,6 +5,7 @@ import BudgetPage from './pages/BudgetPage.jsx';
 import './components/expense/ExpenseNav.css';
 import './components/expense/ExpenseDetails.css';
 import './components/expense/Expense.css';
+import Dashboard from './pages/Dashboard.js';
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ExpensePage from "./pages/ExpensePage";
@@ -95,7 +96,7 @@ function App() {
       <Routes>
         <Route path="/expense" element={<ExpensePage />} />
         <Route path="/budget" element={<BudgetPage />} />
-        {/* fallback */}
+        <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="*" element={<ExpensePage />} />
       </Routes>
     </Router>

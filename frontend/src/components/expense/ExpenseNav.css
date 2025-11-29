@@ -1,3 +1,11 @@
+/* Styles added to fit content */
+.expenses-page {
+  min-width: 820px;
+  min-height: fit-content;
+}
+.expenses-display {
+  min-height: 400px;
+}
 /*Outer Container*/
 .expense-nav {
   position: sticky;
@@ -6,6 +14,7 @@
   background: var(--brand-red);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   z-index: 50;
+  min-width: 850px;;
 }
 
 /* Layout Wrapper*/
@@ -26,7 +35,7 @@
   color: var(--brand-white);
   text-decoration: none;
   font-weight: 900;
-  font-size: 2.25rem;
+  font-size: 2rem;
 }
 
 .expense-nav .levelUp-brand img {

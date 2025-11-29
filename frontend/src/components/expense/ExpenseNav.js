@@ -24,7 +24,7 @@ export default function ExpenseNav() {
         {/*====Left Navigation. Note "aria" provides accessiblity for ambiguous labels.===*/}
         <a href="/" className="levelUp-brand" aria-label="LevelUp home">
           {/*Use levelUp-brand-text css class for Level Up*/}
-           <img src={logo} alt="Logo" />
+           <img src={logo} alt="Logo"/>
           <span className="levelUp-brand-text">LevelUp</span>
           <span className="levelUp-brand-arrow" aria-hidden="true">
             <svg
@@ -42,9 +42,9 @@ export default function ExpenseNav() {
         {/*===================Center Navigation===========*/}
         {/*'nav' is more specific than 'div' here though both can be used."*/}
         <nav className="expense-links" aria-label="Primary Navigation">
-          <Link to="/expense">Expense</Link>
-          <Link to="/budget">Budget</Link>
           <Link to="/dashboard">Dashboard</Link>
+          <Link to="/budget">Budget</Link>
+          <Link to="/expense">Expense</Link>
         </nav>
 
         {/*===================Right Navigation===========*/}

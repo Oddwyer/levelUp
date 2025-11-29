@@ -1,9 +1,53 @@
 import Navbar from "../components/Navbar";
+import { Link } from "react-router-dom";
+import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
+import { useEffect, useState } from "react";
+
+const COLORS = ["#511D43", "#901E3E", "#DC2525", "#EAEBD0", "#075B5E"];
+
+function BudgetPieChart() {
+  const [budgets, setBudgets] = useState([]);
+
+  const userId = 1; // hardcoded for now
+  useEffect(() => {
+    fetch(`http://localhost:8080/api/budgets?userId=${userId}`)  // backend route
+      .then(res => res.json())
+      .then(data => setBudgets(data))
+      .catch(err => console.error("Error fetching budgets:", err));
+  }, []);
+  if (budgets.length === 0) {
+    return (
+      <div style={{ textAlign: "center", padding: "40px" }}>
+        <p>No data available</p>
+      </div>
+    );
+  }
+
+  return (
+    <PieChart width={300} height={350}>
+      <Pie
+        data={budgets}
+        dataKey="amount"
+        nameKey="category"
+        cx="50%"
+        cy="50%"
+        outerRadius={110}
+        label
+      >
+        {budgets.map((entry, index) => (
+          <Cell key={index} fill={COLORS[index % COLORS.length]} />
+        ))}
+      </Pie>
+      <Tooltip />
+      <Legend />
+    </PieChart>
+  );
+}
 
 export default function Dashboard() {
   return (
     <div style={styles.page}>
-      <Navbar />
+      
       <main style={styles.main}>
         {/* Hero section */}
         <section style={styles.heroSection}>
@@ -21,16 +65,25 @@ export default function Dashboard() {
               dashboard.
             </p>
             <div style={styles.heroButtons}>
-              <button style={styles.primaryButton}>View Budgets</button>
-              <button style={styles.secondaryButton}>View Spending</button>
+              <Link to="/budget">
+                <button style={styles.primaryButton}>View Budgets</button>
+              </Link>
+              <Link to="/expense">
+                <button style={styles.secondaryButton}>View Spending</button>
+              </Link>
+              
             </div>
           </div>
           <div style={styles.heroPlaceholder}>
             <div style={styles.heroCard}>
               <h3 style={styles.heroCardTitle}>This is your dashboard</h3>
               <p style={styles.heroCardBody}>
-                Placeholder for income, budget, and expense data.
+                
               </p>
+              <div style={{marginTop: "20px"}}>
+                  <BudgetPieChart />
+              </div>
+              
             </div>
           </div>
         </section>
@@ -45,7 +98,7 @@ export default function Dashboard() {
             </h2>
             <p style={styles.darkBody}>
               LevelUp will provide income tracking, spending insights, personal
-              budgets, and alerts. Placeholder for charts and key metrics.
+              budgets, and alerts.
             </p>
             <button style={styles.outlineLightButton}>Learn More</button>
           </div>
@@ -62,6 +115,7 @@ const DARK_SECTION = "#333333";
 const styles = {
   page: {
     minHeight: "100vh",
+    minWidth: "850px",
     backgroundColor: "#f3f3f3",
   },
   main: {
@@ -143,6 +197,7 @@ const styles = {
   heroCardTitle: {
     fontSize: "1.1rem",
     fontWeight: 700,
+    textAlign: "center",
     marginBottom: "0.5rem",
   },
   heroCardBody: {
